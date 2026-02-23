@@ -95,7 +95,7 @@ const Hero = () => {
               Building AI systems<br />that actually ship.
             </h1>
             <p style={{ fontSize: 18, color: '#555', marginBottom: 32, lineHeight: 1.7, maxWidth: 520 }}>
-              I lead AI Systems at Agentic AI, where I build RAG apps, optimize embeddings, and run local LLMs. 2x hackathon winner. Aiming for a PhD.
+              I lead AI Systems at Agentic AI, where I build RAG apps, optimize embeddings, and run local LLMs. 2x hackathon winner. Math gold medalist.
             </p>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 32 }}>
