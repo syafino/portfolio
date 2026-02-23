@@ -22,6 +22,7 @@ import {
   Users,
 } from 'lucide-react';
 import './index.css';
+import profileImg from './assets/images/DBF9B645-2228-486E-AB08-E38893911C26.png';
 
 // Navigation Component
 const Navigation = () => {
@@ -194,8 +195,8 @@ const Hero = () => {
           <div className="relative w-80 h-80 mx-auto">
             {/* Profile Image Placeholder with Creative Design */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 animate-float glow" />
-            <div className="absolute inset-2 rounded-full bg-slate-900 flex items-center justify-center">
-              <div className="text-8xl font-bold gradient-text">SY</div>
+            <div className="absolute inset-2 rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
+              <img src={profileImg} alt="Syafino Yunalfian" className="w-full h-full object-cover" />
             </div>
             
             {/* Floating Tech Icons */}
