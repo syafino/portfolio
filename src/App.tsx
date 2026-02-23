@@ -12,7 +12,6 @@ import {
   Smartphone,
   MapPin,
   GraduationCap,
-  Briefcase,
   Menu,
   X,
   Youtube,
