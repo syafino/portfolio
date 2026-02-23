@@ -1,24 +1,37 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-secondary: #0ea5e9;
-  --color-accent: #f59e0b;
-  --color-dark: #0f172a;
-  --color-darker: #020617;
+:root {
+  --color-text: #1a1a1a;
+  --color-text-secondary: #555555;
+  --color-text-muted: #777777;
+  --color-bg: #ffffff;
+  --color-bg-alt: #fafafa;
+  --color-border: #e0e0e0;
+  --color-accent: #0066cc;
 }
 
 * {
   scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  background: var(--color-bg);
   min-height: 100vh;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+p {
+  color: var(--color-text-secondary);
 }
 
 ::-webkit-scrollbar {
@@ -26,63 +39,127 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: var(--color-bg-alt);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #6366f1;
+  background: #c0c0c0;
   border-radius: 4px;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #6366f1, #0ea5e9, #6366f1);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradient 3s ease infinite;
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
 }
 
-@keyframes gradient {
-  0% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-  100% { background-position: 0% center; }
+/* Card */
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  transition: box-shadow 0.2s ease;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+.card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+/* Section alternate background */
+.section-alt {
+  background: var(--color-bg-alt);
 }
 
-.glow {
-  box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* Primary button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-text);
+  color: #ffffff;
+  font-weight: 500;
+  transition: background 0.2s ease;
 }
 
-.card-hover {
-  transition: all 0.3s ease;
+.btn-primary:hover {
+  background: #333333;
+  color: #ffffff;
 }
 
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+/* Secondary button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  transition: background 0.2s ease;
 }
 
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 0.5; }
-  50% { transform: scale(1); opacity: 0.3; }
-  100% { transform: scale(0.8); opacity: 0.5; }
+.btn-secondary:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-text);
 }
 
-.animate-pulse-ring {
-  animation: pulse-ring 3s ease-in-out infinite;
+/* Tag */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bg-alt);
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+}
+
+/* Award badge */
+.award-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #b45309;
+  background: #fef3c7;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+}
+
+/* Text colors - explicit classes */
+.text-primary {
+  color: var(--color-text) !important;
+}
+
+.text-secondary {
+  color: var(--color-text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+.text-link {
+  color: var(--color-text-secondary);
+}
+
+.text-link:hover {
+  color: var(--color-text);
+}
+
+/* Nav link */
+.nav-link {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--color-text);
 }
