@@ -62,10 +62,10 @@ const Hero = () => {
 
 const Skills = () => {
   const categories = [
-    { title: 'Languages', icon: Code2, items: ['Python', 'TypeScript/JS', 'SQL', 'C/C++'] },
-    { title: 'AI/ML', icon: Brain, items: ['PyTorch', 'TensorFlow', 'LangChain', 'OpenCV', 'RAG'] },
-    { title: 'Backend', icon: Server, items: ['Node.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GCP'] },
-    { title: 'Frontend', icon: Smartphone, items: ['React', 'React Native', 'Flutter', 'Tailwind'] },
+    { title: 'Programming', icon: Code2, items: ['Java', 'Python', 'TypeScript/JavaScript', 'SQL', 'NoSQL (MongoDB & Neo4j)', 'C/C++'] },
+    { title: 'AI/ML', icon: Brain, items: ['PyTorch', 'TensorFlow', 'NumPy', 'Pandas', 'Scikit-learn', 'OpenCV', 'LangGraph', 'NLP', 'Claude Code', 'Codex'] },
+    { title: 'Backend, Cloud & Systems', icon: Server, items: ['Node.js', 'FastAPI/Flask', 'Docker', 'Git', 'PostgreSQL', 'PostGIS', 'Redis', 'Celery', 'REST API Design', 'Async Python', 'Linux', 'GCP', 'AWS', 'QDrant', 'Pinecone', 'Supabase'] },
+    { title: 'Web & Mobile', icon: Smartphone, items: ['React.js', 'React Native', 'Flutter', 'HTML/CSS', 'MQTT', 'Raspberry Pi'] },
   ];
 
   return (
