@@ -3,18 +3,6 @@ import { Github, Youtube, ExternalLink, Award } from 'lucide-react';
 const ProjectsPage = () => {
   const projects = [
     {
-      title: 'Physical World Scarcity Terminal (PWST)',
-      description: 'Bloomberg-style intelligence terminal for monitoring physical-world signals (water, energy, logistics) that precede economic disruption. Features command-palette UI with 6+ function codes, multi-source ingestion from 8+ government APIs, "Linked Fate" correlation engine connecting physical events to market impact, and Celery-driven automated refresh cycles.',
-      tech: ['Python', 'FastAPI', 'Streamlit', 'PostGIS', 'Celery', 'Redis', 'Docker'],
-      github: 'https://github.com/syafino/Physical-World-Scarcity-Terminal',
-    },
-    {
-      title: 'AceIt: Interview Teleprompter',
-      description: 'Floating overlay that displays bullet points near the webcam so you maintain eye contact during interviews. Invisible to screen sharing and screenshots. Supports global hotkeys for hands-free navigation.',
-      tech: ['Python', 'Tkinter', 'CLI'],
-      github: 'https://github.com/syafino/AceIt',
-    },
-    {
       title: 'MCP Server: AI Memory & Reasoning',
       description: 'Persistent long-term AI memory system enabling structured user profiling and contextual recall.',
       tech: ['TypeScript', 'Node.js', 'JSON-RPC'],
@@ -27,6 +15,18 @@ const ProjectsPage = () => {
       tech: ['Python', 'PostgreSQL', 'Docker', 'LLM'],
       github: 'https://github.com/ashcastelinocs124/text-2-sql-agent',
       award: '2nd Place — Berkeley AgentX (40K+ participants)',
+    },
+    {
+      title: 'Physical World Scarcity Terminal (PWST)',
+      description: 'Bloomberg-style terminal that monitors water, energy, and logistics signals to detect disruptions before they hit markets.',
+      tech: ['Python', 'FastAPI', 'Streamlit', 'PostGIS', 'Celery', 'Redis', 'Docker'],
+      github: 'https://github.com/syafino/Physical-World-Scarcity-Terminal',
+    },
+    {
+      title: 'AceIt: Interview Teleprompter',
+      description: 'Invisible floating overlay that displays bullet points near your webcam so you maintain eye contact during interviews.',
+      tech: ['Python', 'Tkinter', 'CLI'],
+      github: 'https://github.com/syafino/AceIt',
     },
     {
       title: 'Framelight: AI Camera Assistant',
