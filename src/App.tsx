@@ -1,36 +1,44 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ProjectsPage from './pages/ProjectsPage';
-import ExperiencePage from './pages/ExperiencePage';
-import ContactPage from './pages/ContactPage';
+import { initScroll, scrollTo, ScrollTrigger } from './fx/scroll';
+import Nav from './sections/Nav';
+import Hero from './sections/Hero';
+import Layers from './sections/Layers';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import Life from './sections/Life';
+import Numbers from './sections/Numbers';
+import Ask from './sections/Ask';
+import CTA from './sections/CTA';
+import Footer from './sections/Footer';
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => window.scrollTo(0, 0), [pathname]);
-  return null;
-};
+// Old multi-page URLs still land on the right section.
+const legacy: Record<string, string> = { '/about': '#work', '/projects': '#projects', '/experience': '#experience', '/contact': '#contact', '/life': '#life' };
 
-const App = () => (
-  <BrowserRouter>
-    <ScrollToTop />
-    <div className="min-h-screen bg-black">
-      <Navigation />
-      <main className="pt-14">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
+const App = () => {
+  useEffect(() => {
+    const clean = initScroll();
+    const to = legacy[location.pathname] ?? (location.hash || null);
+    if (location.pathname !== '/') history.replaceState(null, '', '/');
+    document.fonts.ready.then(() => { ScrollTrigger.refresh(); if (to) scrollTo(to); });
+    return clean;
+  }, []);
+
+  return (
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Layers />
+        <Experience />
+        <Projects />
+        <Life />
+        <Numbers />
+        <Ask />
+        <CTA />
       </main>
       <Footer />
-    </div>
-  </BrowserRouter>
-);
+    </>
+  );
+};
 
 export default App;

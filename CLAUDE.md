@@ -15,19 +15,15 @@ Personal portfolio website built with React 19, TypeScript, Vite, and Tailwind C
 
 ## Architecture
 
-**Routing**: Client-side via React Router DOM in `src/App.tsx`. All routes rewrite to `/` on Vercel (SPA config in `vercel.json`).
+**Single page**, no router. `src/App.tsx` renders the sections in order and maps legacy paths (`/about`, `/projects`, `/experience`, `/contact`) to section anchors on load. `vercel.json` rewrites everything to `/`.
 
-**Content**: All copy lives in `src/content.ts` (hero, now, photos, faq, skills, about, education, experience, projects, socials). Edit that file, not the pages. Photos go in `public/photos/` and are referenced as `/photos/<name>`; filenames are case-sensitive on Vercel. Resume PDF is `public/resume.pdf`.
+**Content**: All copy lives in `src/content.ts` (hero, terminal lines, layers, experience, projects, photos, numbers, faq, cta, nav, socials). Edit that file, not the sections. Photos go in `public/photos/` and are referenced as `/photos/<name>`; filenames are case-sensitive on Vercel. Resume PDF is `public/resume.pdf`.
 
-**Pages** (`src/pages/`): `HomePage` (hero, Now, Life photo gallery, Skills, CTA), `AboutPage` (bio, education, Ask-me FAQ via native `<details>`), `ProjectsPage` (3-col dense bento; tinted cards span 2), `ExperiencePage` (timeline), `ContactPage`.
+**Sections** (`src/sections/`, page order): `Nav` (floating bar, mobile menu), `Hero` (270vh sticky stage: view A with `TerminalCard` tilts away, view B rises in), `Layers` (450vh sticky inverted pyramid, desktop only), `Experience` (280vh sticky terminal with tabs, scroll or click switches roles, desktop only), `Projects` (dense 3-col bento), `Life` (snap carousel, hidden until `photos` has entries), `Numbers`, `Ask` (native `<details>`), `CTA` (full-screen, cursor-following glow blobs), `Footer`. `Head` is the shared eyebrow + split-reveal headline.
 
-**Shared components** (`src/components/`): `Navigation` (fixed header with mobile menu, Resume button), `Footer`, `Section` (eyebrow + headline wrapper), `Reveal` (IntersectionObserver fade-up, no animation library). `App.tsx` has a `ScrollToTop` on route change.
+**Effects** (`src/fx/`): `ascii.ts` is a 2D-canvas ASCII field (value noise, pointer trail, click ripples, three color stops; pauses offscreen/hidden; static under reduced motion) wrapped by `AsciiCanvas.tsx`. `scroll.ts` sets up Lenis + GSAP ScrollTrigger/SplitText and exports `scrollTo`. `reveal.ts` has `splitReveal` (char stagger) and `fadeUp`.
 
-**No state management library** — only local `useState` for UI toggles. No API calls or backend; all content is static.
-
-## Styling
-
-Dark theme modeled on memorable.sh. Tailwind utilities + custom classes in `src/index.css`: `.eyebrow` (mono uppercase label), `.serif` (italic accent inside headlines), `.card` + `.card-sky/-violet/-peach/-mint` tints, `.btn-primary`, `.btn-secondary`, `.tag`, `.glow`, `.reveal`. Tokens are CSS vars on `:root` (`--bg`, `--bg-card`, `--fg`, `--fg-2`, `--fg-3`, `--border`, accent colors). Fonts via Google Fonts: Geist (body), Geist Mono (labels/tags), Instrument Serif italic (accents). No inline `style` objects; use Tailwind classes.
+**Deps**: `gsap` (ScrollTrigger + SplitText, free since 3.13), `lenis`, `lucide-react`. No Three.js: the ASCII effect is plain canvas. Pinned sections use CSS `sticky` plus GSAP scrubbed timelines, gated to `min-width: 768px` with `gsap.matchMedia`.
 
 ## Key Config
 

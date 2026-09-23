@@ -13,7 +13,7 @@ export const socials = {
 };
 
 export const hero = {
-  eyebrow: 'Computer Science & Statistics @ UIUC · Class of 2027',
+  eyebrow: 'CS & Statistics @ UIUC · Class of 2027',
   bio: "AI engineer intern at Elara Health and Vice President & AI Systems Lead at Agentic AI @ UIUC. I build agents, RAG pipelines, and automation that runs in production, not just in demos. 2x hackathon runner-up. Math gold medalist.",
   status: 'Now · AI Engineer Intern @ Elara Health · VP @ Agentic AI',
 };
@@ -82,6 +82,7 @@ export const education = {
 
 export const experience = [
   {
+    slug: 'elara',
     company: 'Elara Health, Inc',
     role: 'AI Engineer Intern',
     where: 'San Francisco, CA',
@@ -95,6 +96,7 @@ export const experience = [
     ],
   },
   {
+    slug: 'agentic-ai',
     company: 'Agentic AI @ UIUC',
     role: 'Vice President & AI Systems Lead',
     where: 'Champaign, IL',
@@ -108,6 +110,7 @@ export const experience = [
     ],
   },
   {
+    slug: 'garg',
     company: 'Garg Research Group · UIUC',
     role: 'Software Engineer & Automation Research Assistant',
     where: 'Champaign, IL',
@@ -120,6 +123,7 @@ export const experience = [
     ],
   },
   {
+    slug: 'acm',
     company: 'ACM SIG Mobile',
     role: 'Technical Lead, Backend',
     where: 'Champaign, IL',
@@ -130,6 +134,7 @@ export const experience = [
     ],
   },
   {
+    slug: 'cimb',
     company: 'CIMB Niaga Bank',
     role: 'Data Analysis Intern',
     where: 'Jakarta, Indonesia',
@@ -144,6 +149,7 @@ export const experience = [
 export type Project = {
   title: string;
   award?: string;
+  stat?: string;
   tint?: string;
   description: string;
   tech: string[];
@@ -155,6 +161,7 @@ export const projects: Project[] = [
   {
     title: 'Text-to-SQL Evaluation Agent',
     award: '2nd place · Berkeley AgentX · 40,000+ participants',
+    stat: '2nd',
     tint: 'card-sky',
     description: 'Sandboxed SQL-evaluation framework (safety, syntax, schema, logic) with pre-execution hallucination checks, reproducible Dockerized Postgres environments, multi-dimensional scoring, automated error taxonomy, and web/CLI interfaces for observable, testable agent evaluations.',
     tech: ['Python', 'PostgreSQL', 'sqlglot', 'Docker', 'LLM'],
@@ -163,6 +170,7 @@ export const projects: Project[] = [
   {
     title: 'MCP Server: AI Memory & Reasoning',
     award: '2nd place · Claude UIUC Hackathon',
+    stat: '2nd',
     tint: 'card-violet',
     description: 'Persistent long-term AI memory system enabling structured user profiling and contextual recall.',
     tech: ['TypeScript', 'Node.js', 'JSON-RPC'],
@@ -171,6 +179,7 @@ export const projects: Project[] = [
   {
     title: 'Agentic AI Buildathon',
     award: 'Organizer · ~200 competitors · Google & GIES sponsors',
+    stat: '~200',
     tint: 'card-peach',
     description: 'Led planning and execution of a business-focused Agentic AI buildathon, partnering with campus AI organizations and the Big Ten AI Conference to give business students an accessible path into agentic AI.',
     tech: ['Event Strategy', 'Sponsorship', 'Community'],
@@ -211,3 +220,44 @@ export const projects: Project[] = [
     tech: ['C++', 'HTML', 'JavaScript', 'Linux'],
   },
 ];
+
+export const nav = [
+  { name: 'Work', href: '#work' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Life', href: '#life' },
+  { name: 'Ask me', href: '#ask' },
+];
+
+// Hero terminal. Lines starting with "$ " are typed; others print as output.
+export const terminal = [
+  '$ whoami',
+  'syafino — AI engineer, CS & Statistics @ UIUC',
+  '$ cat now.txt',
+  'Elara Health        AI Engineer Intern',
+  'Agentic AI @ UIUC   VP & AI Systems Lead',
+  'Garg Research       Automation RA',
+  '$ ls wins/',
+  '2nd_berkeley_agentx_40k+    2nd_claude_uiuc_hackathon',
+  '$ echo $STACK',
+  'python typescript pytorch langgraph fastapi postgres docker gcp',
+];
+
+export const layers = [
+  { n: 4, title: 'Agents & RAG', text: 'The layer people interact with. Multi-agent systems, retrieval pipelines, and inference tuned to feel instant.', tags: ['LangGraph', 'Qdrant', 'Groq', 'Claude Code', 'PubMedBERT'] },
+  { n: 3, title: 'Backend & data', text: 'APIs and queues that keep the agents fed. Async Python, task pipelines, time-series and geospatial storage.', tags: ['FastAPI', 'PostgreSQL', 'PostGIS', 'Redis', 'Celery', 'Docker'] },
+  { n: 2, title: 'Systems & devices', text: 'Where software meets hardware. Cameras, sensors, provisioning, and cloud relays for lab equipment.', tags: ['Raspberry Pi', 'OpenCV', 'MQTT', 'GCP', 'Linux'] },
+  { n: 1, title: 'Foundations', text: 'The fundamentals underneath it all. Algorithms, statistics, and the languages I reach for first.', tags: ['Java', 'C/C++', 'DSA', 'Statistics', 'Linear Algebra'] },
+];
+
+export const numbers = [
+  { stat: '7d → 30min', title: 'Cement R3 test time', text: 'Full-stack automation for a lab device at the Garg Research Group, from Raspberry Pi to cloud dashboard.' },
+  { stat: '3.88', title: 'GPA at UIUC', text: "Computer Science & Statistics, Dean's List, Honors Program. Class of 2027." },
+  { stat: '~200', title: 'Buildathon competitors', text: 'Organized the Agentic AI Buildathon with Google and GIES as primary sponsors.' },
+];
+
+export const cta = {
+  title: "Let's build something",
+  accent: 'together.',
+  text: 'Open to AI engineering roles, research collaborations, and interesting side projects.',
+};
