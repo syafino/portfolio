@@ -1,70 +1,51 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { socials } from '../content';
+
+const items = [
+  { name: 'About', path: '/about' },
+  { name: 'Projects', path: '/projects' },
+  { name: 'Experience', path: '/experience' },
+  { name: 'Contact', path: '/contact' },
+];
 
 const Navigation = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  const navItems = [
-    { name: 'About', path: '/about' },
-    { name: 'Projects', path: '/projects' },
-    { name: 'Experience', path: '/experience' },
-    { name: 'Contact', path: '/contact' },
-  ];
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  const link = (item: (typeof items)[number], mobile = false) => (
+    <Link
+      key={item.path}
+      to={item.path}
+      onClick={() => setOpen(false)}
+      className={`eyebrow transition-colors hover:text-[var(--fg)] ${pathname === item.path ? 'text-[var(--fg)]' : ''} ${mobile ? 'block py-2' : ''}`}
+    >
+      {item.name}
+    </Link>
+  );
 
   return (
-    <nav style={{ 
-      position: 'fixed', 
-      top: 0, 
-      left: 0, 
-      right: 0, 
-      zIndex: 50, 
-      background: 'rgba(255,255,255,0.9)', 
-      backdropFilter: 'blur(12px)',
-      borderBottom: '1px solid #e0e0e0'
-    }}>
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" style={{ fontSize: 17, fontWeight: 600, color: '#1a1a1a', textDecoration: 'none' }}>
-          Syafino Yunalfian
-        </Link>
+    <nav className="fixed inset-x-0 top-0 z-50 border-b border-[var(--border)] bg-black/70 backdrop-blur-md">
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+        <Link to="/" className="text-[15px] font-semibold tracking-tight">Syafino Yunalfian</Link>
 
-        <div style={{ display: 'flex', gap: 32 }} className="hidden md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              className="nav-link"
-              style={{
-                color: location.pathname === item.path ? '#1a1a1a' : '#555',
-                fontWeight: location.pathname === item.path ? 600 : 400,
-              }}
-            >
-              {item.name}
-            </Link>
-          ))}
+        <div className="hidden items-center gap-8 md:flex">
+          {items.map((i) => link(i))}
+          <a href={socials.resume} target="_blank" rel="noopener noreferrer" className="btn-secondary !px-4 !py-1.5 !text-xs">
+            Resume
+          </a>
         </div>
 
-        <button
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#555' }}
-          className="md:hidden"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        <button aria-label="Menu" className="text-[var(--fg-2)] md:hidden" onClick={() => setOpen(!open)}>
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {isMobileMenuOpen && (
-        <div style={{ background: '#fff', borderBottom: '1px solid #e0e0e0', padding: '16px 24px' }} className="md:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.path}
-              style={{ display: 'block', padding: '8px 0', color: '#555', fontSize: 15, textDecoration: 'none' }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
+      {open && (
+        <div className="border-b border-[var(--border)] bg-black px-6 py-4 md:hidden">
+          {items.map((i) => link(i, true))}
+          <a href={socials.resume} target="_blank" rel="noopener noreferrer" className="eyebrow block py-2">Resume</a>
         </div>
       )}
     </nav>

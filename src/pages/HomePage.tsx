@@ -1,103 +1,124 @@
 import { Link } from 'react-router-dom';
-import {
-  Github,
-  Linkedin,
-  Mail,
-  ArrowRight,
-  Code2,
-  Brain,
-  Server,
-  Smartphone,
-} from 'lucide-react';
-import profileImg from '../assets/images/DBF9B645-2228-486E-AB08-E38893911C26.png';
+import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react';
+import profileImg from '../assets/profile.png';
+import Reveal from '../components/Reveal';
+import Section from '../components/Section';
+import { hero, now, photos, skills, socials } from '../content';
 
-const Hero = () => {
-  return (
-    <section style={{ paddingTop: 120, paddingBottom: 80, paddingLeft: 24, paddingRight: 24 }}>
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 48, alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ flex: '1 1 400px', minWidth: 0 }}>
-            <p style={{ fontSize: 14, color: '#777', marginBottom: 12, fontWeight: 500 }}>
-              Computer Science & Statistics @ UIUC
-            </p>
-            <h1 style={{ fontSize: 44, fontWeight: 600, color: '#1a1a1a', marginBottom: 20, lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-              Building AI systems<br />that actually ship.
-            </h1>
-            <p style={{ fontSize: 18, color: '#555', marginBottom: 32, lineHeight: 1.7, maxWidth: 520 }}>
-              Fullstack software engineer at Grainger School of Engineering. I lead AI Systems at Agentic AI, where I build RAG apps, optimize embeddings, and run local LLMs. 2x hackathon winner. Math gold medalist.
-            </p>
+const Hero = () => (
+  <section className="relative overflow-hidden px-6 pb-20 pt-24 md:pt-32">
+    <div className="glow" />
+    <div className="relative mx-auto grid max-w-5xl items-center gap-12 md:grid-cols-[1.4fr_1fr]">
+      <Reveal>
+        <p className="eyebrow mb-4">{hero.eyebrow}</p>
+        <h1 className="mb-6 text-5xl md:text-6xl">
+          Building AI systems that <span className="serif">actually ship.</span>
+        </h1>
+        <p className="mb-8 max-w-xl text-lg">{hero.bio}</p>
+        <div className="mb-8 flex flex-wrap gap-3">
+          <Link to="/contact" className="btn-primary">Get in touch <ArrowRight size={16} /></Link>
+          <a href={socials.resume} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+            <Download size={16} /> Download resume
+          </a>
+        </div>
+        <div className="flex gap-5 text-[var(--fg-3)]">
+          <a href={socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-[var(--fg)]"><Github size={20} /></a>
+          <a href={socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-[var(--fg)]"><Linkedin size={20} /></a>
+          <a href={`mailto:${socials.email}`} aria-label="Email" className="hover:text-[var(--fg)]"><Mail size={20} /></a>
+        </div>
+      </Reveal>
+      <Reveal delay={0.15} className="justify-self-center md:justify-self-end">
+        <div className="card card-violet w-64 overflow-hidden p-2 md:w-72">
+          <img src={profileImg} alt="Syafino Yunalfian" className="aspect-square w-full rounded-2xl object-cover" />
+        </div>
+      </Reveal>
+    </div>
+    <Reveal delay={0.3} className="relative mx-auto mt-14 max-w-5xl">
+      <p className="eyebrow">{hero.status}</p>
+    </Reveal>
+  </section>
+);
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 32 }}>
-              <Link to="/contact" className="btn-primary" style={{ padding: '14px 28px', borderRadius: 100, fontSize: 15, gap: 8 }}>
-                Get in touch <ArrowRight size={16} />
-              </Link>
-              <Link to="/projects" className="btn-secondary" style={{ padding: '14px 28px', borderRadius: 100, fontSize: 15 }}>
-                View projects
-              </Link>
-            </div>
+const Now = () => (
+  <Section eyebrow="Now" title={<>What I'm <span className="serif">working on.</span></>}>
+    <div className="grid gap-4 md:grid-cols-3">
+      {now.map((n, i) => (
+        <Reveal key={n.title} delay={i * 0.08}>
+          <div className={`card ${n.tint} h-full p-6`}>
+            <p className="eyebrow mb-3">0{i + 1}</p>
+            <h3 className="mb-2 text-lg">{n.title}</h3>
+            <p className="text-sm">{n.text}</p>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+);
 
-            <div style={{ display: 'flex', gap: 20 }}>
-              {[
-                { icon: Github, href: 'https://github.com/syafino' },
-                { icon: Linkedin, href: 'https://linkedin.com/in/syafino-yunalfian' },
-                { icon: Mail, href: 'mailto:syafino2@illinois.edu' },
-              ].map(({ icon: Icon, href }) => (
-                <a key={href} href={href} target="_blank" rel="noopener noreferrer" className="text-link">
-                  <Icon size={20} />
-                </a>
-              ))}
+const PhotoGrid = ({ label, items }: { label: string; items: typeof photos }) =>
+  items.length === 0 ? null : (
+    <div className="mb-8">
+      <p className="eyebrow mb-4">{label}</p>
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+        {items.map((p, i) => (
+          <Reveal key={p.src} delay={i * 0.05} className={p.wide ? 'md:col-span-2' : ''}>
+            <figure className="card h-full overflow-hidden">
+              <img src={p.src} alt={p.caption} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="px-4 py-3 text-sm text-[var(--fg-2)]">{p.caption}</figcaption>
+            </figure>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+
+const Life = () =>
+  photos.length === 0 ? null : (
+    <Section eyebrow="Life" title={<>Outside the <span className="serif">terminal.</span></>}>
+      <PhotoGrid label="Travel" items={photos.filter((p) => p.group === 'travel')} />
+      <PhotoGrid label="Hackathons" items={photos.filter((p) => p.group === 'hackathon')} />
+    </Section>
+  );
+
+const Skills = () => (
+  <Section eyebrow="Skills" title={<>The <span className="serif">toolbox.</span></>}>
+    <div className="grid gap-4 md:grid-cols-2">
+      {skills.map((s, i) => (
+        <Reveal key={s.title} delay={i * 0.08}>
+          <div className="card h-full p-6">
+            <h3 className="mb-4 text-base">{s.title}</h3>
+            <div className="flex flex-wrap gap-2">
+              {s.items.map((t) => <span key={t} className="tag">{t}</span>)}
             </div>
           </div>
+        </Reveal>
+      ))}
+    </div>
+  </Section>
+);
 
-          <div style={{ flexShrink: 0 }}>
-            <div style={{ width: 260, height: 260, borderRadius: 24, overflow: 'hidden', background: '#f5f5f5' }}>
-              <img src={profileImg} alt="Syafino Yunalfian" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-          </div>
+const CTA = () => (
+  <section className="px-6 pb-24 pt-4">
+    <Reveal className="mx-auto max-w-5xl">
+      <div className="card card-sky flex flex-wrap items-center justify-between gap-6 p-8 md:p-10">
+        <div>
+          <p className="eyebrow mb-2">Contact</p>
+          <h2 className="text-2xl md:text-3xl">Want to build something? <span className="serif">Let's talk.</span></h2>
         </div>
+        <Link to="/contact" className="btn-primary">Get in touch <ArrowRight size={16} /></Link>
       </div>
-    </section>
-  );
-};
+    </Reveal>
+  </section>
+);
 
-const Skills = () => {
-  const categories = [
-    { title: 'Programming', icon: Code2, items: ['Java', 'Python', 'TypeScript/JavaScript', 'SQL', 'NoSQL (MongoDB & Neo4j)', 'C/C++'] },
-    { title: 'AI/ML', icon: Brain, items: ['PyTorch', 'TensorFlow', 'NumPy', 'Pandas', 'Scikit-learn', 'OpenCV', 'LangGraph', 'NLP', 'Claude Code', 'Codex'] },
-    { title: 'Backend, Cloud & Systems', icon: Server, items: ['Node.js', 'FastAPI/Flask', 'Docker', 'Git', 'PostgreSQL', 'PostGIS', 'Redis', 'Celery', 'REST API Design', 'Async Python', 'Linux', 'GCP', 'AWS', 'QDrant', 'Pinecone', 'Supabase'] },
-    { title: 'Web & Mobile', icon: Smartphone, items: ['React.js', 'React Native', 'Flutter', 'HTML/CSS', 'MQTT', 'Raspberry Pi'] },
-  ];
-
-  return (
-    <section style={{ padding: '80px 24px' }}>
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
-        <h2 style={{ fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 40 }}>Skills</h2>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20 }}>
-          {categories.map((cat) => (
-            <div key={cat.title} className="card" style={{ padding: 24 }}>
-              <cat.icon size={20} style={{ color: '#777', marginBottom: 12 }} />
-              <h3 style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a', marginBottom: 16 }}>{cat.title}</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {cat.items.map((item) => (
-                  <li key={item} style={{ fontSize: 14, color: '#555', marginBottom: 8 }}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const HomePage = () => {
-  return (
-    <>
-      <Hero />
-      <Skills />
-    </>
-  );
-};
+const HomePage = () => (
+  <>
+    <Hero />
+    <Now />
+    <Life />
+    <Skills />
+    <CTA />
+  </>
+);
 
 export default HomePage;
