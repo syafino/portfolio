@@ -14,8 +14,8 @@ export const socials = {
 
 export const hero = {
   eyebrow: 'CS & Statistics @ UIUC · Class of 2027',
-  bio: "AI engineer intern at Elara Health and Vice President & AI Systems Lead at Agentic AI @ UIUC. I build agents, RAG pipelines, and automation that runs in production, not just in demos. 2x hackathon runner-up. Math gold medalist.",
-  status: 'Now · AI Engineer Intern @ Elara Health · VP @ Agentic AI',
+  bio: "Co-founder at Sylmu, Vice President & AI Systems Lead at Agentic AI @ UIUC, and formerly an AI engineer intern at Elara Health. I build agents, RAG pipelines, and automation that runs in production, not just in demos. 2x hackathon runner-up. Math gold medalist.",
+  status: 'Now · Co-founder @ Sylmu · VP @ Agentic AI',
 };
 
 export const now = [
@@ -60,7 +60,7 @@ export const skills = [
 export const about = {
   paragraphs: [
     "I'm a Computer Science and Statistics student at the University of Illinois at Urbana-Champaign with a passion for building systems that automate repetitive tasks.",
-    "I build practical AI systems that actually run, not just papers or demos. This summer I'm an AI engineer intern at Elara Health, building automation loops with AI fallback for healthcare portals. At Agentic AI @ UIUC I'm Vice President & AI Systems Lead, where I ship RAG-based apps, optimize embeddings, and host local LLMs with Ollama to cut API costs and boost privacy.",
+    "I build practical AI systems that actually run, not just papers or demos. I'm a co-founder at Sylmu, and this past summer I was an AI engineer intern at Elara Health, building automation loops with AI fallback for healthcare portals. At Agentic AI @ UIUC I'm Vice President & AI Systems Lead, where I ship RAG-based apps, optimize embeddings, and host local LLMs with Ollama to cut API costs and boost privacy.",
     "I've built everything from on-device CV models for Framelight, a real-time mobile composition assistant, to a persistent MCP memory server that won 2nd place at the Claude UIUC Hackathon, and a Text-to-SQL evaluation agent that took 2nd place at the Berkeley AgentX Hackathon.",
     'My toolbox is Python, PyTorch, TensorFlow, LangChain, FastAPI, React Native, TypeScript, Docker, and Postgres. I care about performance, reproducibility, and deployment.',
   ],
@@ -228,7 +228,7 @@ export const terminal = [
   '$ whoami',
   'syafino — AI engineer, CS & Statistics @ UIUC',
   '$ cat now.txt',
-  'Elara Health        AI Engineer Intern',
+  'Sylmu               Co-founder',
   'Agentic AI @ UIUC   VP & AI Systems Lead',
   'Garg Research       Automation RA',
   '$ ls wins/',

@@ -68,14 +68,14 @@ const Hero = () => {
         {/* View B */}
         <div ref={b} className="absolute inset-0 z-10 flex flex-col justify-between px-[5vw] pt-[15vh] pb-[4.5vh]">
           <div className="max-w-[70vw] max-md:max-w-full">
-            <h1 className="mb-4">Syafino Yunalfian.<br /><span className="serif text-[var(--h2)] text-[var(--fg-2)]">Currently shipping at Elara Health.</span></h1>
+            <h1 className="mb-4">Syafino Yunalfian.<br /><span className="serif text-[var(--h2)] text-[var(--fg-2)]">Currently shipping at Sylmu.</span></h1>
             <div className="mt-8 inline-flex items-center gap-4 rounded-md border border-white/15 bg-black/60 px-4 py-3 mono text-[var(--fs-sm)]">
               <span><span className="text-[var(--mint)]">$ </span>mail {socials.email}</span>
               <button onClick={copy} aria-label="Copy email" className="text-[var(--fg-3)] hover:text-white">{copied ? <Check size={14} /> : <Copy size={14} />}</button>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
               <span className="eyebrow">Live at</span>
-              {['Elara Health', 'Agentic AI @ UIUC', 'Garg Research Group'].map((n) => <span key={n} className="text-[clamp(0.95rem,1.1vw,1.2rem)] font-medium text-[var(--fg)]">{n}</span>)}
+              {['Sylmu', 'Agentic AI @ UIUC', 'Garg Research Group'].map((n) => <span key={n} className="text-[clamp(0.95rem,1.1vw,1.2rem)] font-medium text-[var(--fg)]">{n}</span>)}
             </div>
           </div>
           <p className="eyebrow text-neutral-300">Scroll to continue</p>
