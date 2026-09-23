@@ -29,11 +29,6 @@ export const now = [
     title: 'Agentic AI @ UIUC',
     text: 'Running lectures and workshops at the largest AI club on campus, and shipping a multi-agent healthcare system with patient simulation and scheduling.',
   },
-  {
-    tint: 'card-mint',
-    title: 'Next',
-    text: 'Aiming for a CS PhD at UIUC. I want to work on systems that make advanced AI usable and trustworthy.',
-  },
 ];
 
 export type Photo = { src: string; caption: string; group: 'travel' | 'hackathon'; wide?: boolean };
@@ -68,7 +63,6 @@ export const about = {
     "I build practical AI systems that actually run, not just papers or demos. This summer I'm an AI engineer intern at Elara Health, building automation loops with AI fallback for healthcare portals. At Agentic AI @ UIUC I'm Vice President & AI Systems Lead, where I ship RAG-based apps, optimize embeddings, and host local LLMs with Ollama to cut API costs and boost privacy.",
     "I've built everything from on-device CV models for Framelight, a real-time mobile composition assistant, to a persistent MCP memory server that won 2nd place at the Claude UIUC Hackathon, and a Text-to-SQL evaluation agent that took 2nd place at the Berkeley AgentX Hackathon.",
     'My toolbox is Python, PyTorch, TensorFlow, LangChain, FastAPI, React Native, TypeScript, Docker, and Postgres. I care about performance, reproducibility, and deployment.',
-    "I'm aiming for a PhD in Computer Science at UIUC, and I want to work on systems that make advanced AI usable and trustworthy.",
   ],
   tags: ['Champaign, IL', 'Class of 2027', "Dean's List", 'GPA 3.88'],
 };
