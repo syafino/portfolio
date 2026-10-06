@@ -23,7 +23,7 @@ const highlightIcons: Record<string, LucideIcon> = { Resume: FileText, GitHub: C
 const stats = [
   { n: posts.length, label: 'posts', href: '#posts' },
   { n: tagged.length, label: 'projects', href: '#tagged' },
-  { n: profile.gpa, label: 'GPA' },
+  { n: reposts.length, label: 'achievements', href: '#reposts' },
 ];
 
 // Old multi-page URLs still land on the right tab.
