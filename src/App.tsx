@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { FileText, FolderGit2, Grid3x3, House, Repeat2, Send, SquareUser, Trophy } from 'lucide-react';
+import { Briefcase, Code, FileText, FolderGit2, Grid3x3, House, Link, Mail, Repeat2, Send, SquareUser, Trophy, type LucideIcon } from 'lucide-react';
 import { highlights, posts, profile, reposts, socials, tagged } from './content';
 import { Tile, Viewer } from './Post';
+import Chat, { type ChatState } from './Chat';
 import avatar from './assets/profile.jpg';
 
 const tabs = [
@@ -18,6 +19,8 @@ const nav = [
   { label: 'Resume', icon: FileText, href: socials.resume },
 ];
 
+const highlightIcons: Record<string, LucideIcon> = { Resume: FileText, GitHub: Code, LinkedIn: Briefcase, Email: Mail };
+
 const stats = [
   { n: posts.length, label: 'posts', href: '#posts' },
   { n: tagged.length, label: 'projects', href: '#tagged' },
@@ -33,6 +36,7 @@ const readTab = () => tabs.find((t) => '#' + t.id === location.hash) ?? tabs[0];
 const App = () => {
   const [tab, setTab] = useState(readTab);
   const [open, setOpen] = useState<number | null>(null);
+  const [chat, setChat] = useState<ChatState>('closed');
 
   useEffect(() => {
     const on = () => setTab(readTab());
@@ -65,7 +69,7 @@ const App = () => {
           <span className="hidden xl:inline">{profile.username}</span>
         </a>
         {nav.map(({ label, icon: Icon, href }) => (
-          <a key={label} href={href} aria-label={label} target={href.startsWith('/') ? '_blank' : undefined} onClick={href === '#posts' ? () => scrollTo(0, 0) : undefined} className="flex items-center gap-4 rounded-lg p-3 hover:bg-hover">
+          <a key={label} href={href} aria-label={label} target={href.startsWith('/') ? '_blank' : undefined} onClick={label === 'Messages' ? (e) => { e.preventDefault(); setChat('full'); } : href === '#posts' ? () => scrollTo(0, 0) : undefined} className="flex items-center gap-4 rounded-lg p-3 hover:bg-hover">
             <Icon />
             <span className="hidden text-base xl:inline">{label}</span>
           </a>
@@ -91,7 +95,7 @@ const App = () => {
                 <h1 className="text-xl">{profile.username}</h1>
                 <div className="flex gap-2 font-semibold">
                   <a href={socials.linkedin} target="_blank" rel="noreferrer" className="rounded-lg bg-blue px-5 py-1.5 text-white">Follow</a>
-                  <a href={socials.email} className="rounded-lg bg-hover px-5 py-1.5">Message</a>
+                  <button onClick={() => setChat('open')} className="cursor-pointer rounded-lg bg-hover px-5 py-1.5 font-semibold">Message</button>
                 </div>
               </div>
               <ul className="my-5 hidden gap-10 text-base md:flex">{statItems}</ul>
@@ -101,14 +105,17 @@ const App = () => {
           <div className="px-4 pb-5 md:hidden">{bio}</div>
 
           <div className="flex gap-4 overflow-x-auto px-4 pb-4 md:gap-9 md:px-11 md:pb-11">
-            {highlights.map(({ label, href, icon: Icon }) => (
+            {highlights.map(({ label, href }) => {
+              const Icon = highlightIcons[label] ?? Link;
+              return (
               <a key={label} href={href} target="_blank" rel="noreferrer" className="flex shrink-0 flex-col items-center gap-2 text-xs font-semibold">
                 <span className="rounded-full border border-line p-[3px]">
                   <span className="flex size-14 items-center justify-center rounded-full bg-hover md:size-[77px]"><Icon /></span>
                 </span>
                 {label}
               </a>
-            ))}
+              );
+            })}
           </div>
 
           <ul className="flex justify-around border-t border-line py-3 text-center md:hidden">{statItems}</ul>
@@ -134,6 +141,7 @@ const App = () => {
       </main>
 
       <Viewer list={tab.list} index={open} setIndex={setOpen} />
+      <Chat state={chat} setState={setChat} />
     </>
   );
 };

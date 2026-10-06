@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bookmark, ChevronLeft, ChevronRight, Heart, MessageCircle, Send, X } from 'lucide-react';
+import { Bookmark, Copy, ChevronLeft, ChevronRight, Heart, MessageCircle, Send, X } from 'lucide-react';
 import { profile, socials, type Post } from './content';
 import avatar from './assets/profile.jpg';
 
@@ -12,9 +12,11 @@ const gradients = [
   'linear-gradient(135deg, #dd2a7b, #515bd4)',
 ];
 
+const images = (post: Post) => [post.image ?? []].flat();
+
 const Media = ({ post, contain }: { post: Post; contain?: boolean }) =>
   post.image ? (
-    <img src={post.image} alt={post.title} loading="lazy" className={`h-full w-full ${contain ? 'object-contain' : 'object-cover'}`} />
+    <img src={images(post)[0]} alt={post.title} loading="lazy" className={`h-full w-full ${contain ? 'object-contain' : 'object-cover'}`} />
   ) : (
     <div className="@container h-full w-full" style={{ background: gradients[[...post.slug].reduce((a, c) => a + c.charCodeAt(0), 0) % gradients.length] }}>
       <div className="flex h-full flex-col items-center justify-center gap-[3cqw] p-[8cqw] text-center text-white">
@@ -24,9 +26,33 @@ const Media = ({ post, contain }: { post: Post; contain?: boolean }) =>
     </div>
   );
 
+const Carousel = ({ post }: { post: Post }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [at, setAt] = useState(0);
+  const all = images(post);
+  const slide = (by: number) => ref.current!.scrollBy({ left: by * ref.current!.clientWidth, behavior: 'smooth' });
+  const arrow = 'absolute top-1/2 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/80 text-black';
+
+  return (
+    <div className="relative h-full w-full">
+      <div ref={ref} onScroll={(e) => setAt(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))} className="flex h-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]">
+        {all.map((src, i) => (
+          <img key={src} src={src} alt={`${post.title}, photo ${i + 1} of ${all.length}`} className="h-full w-full shrink-0 snap-center object-contain" />
+        ))}
+      </div>
+      {at > 0 && <button onClick={() => slide(-1)} aria-label="Previous photo" className={`${arrow} left-2`}><ChevronLeft size={18} /></button>}
+      {at < all.length - 1 && <button onClick={() => slide(1)} aria-label="Next photo" className={`${arrow} right-2`}><ChevronRight size={18} /></button>}
+      <div className="absolute inset-x-0 bottom-3 flex justify-center gap-1">
+        {all.map((src, i) => <span key={src} className={`size-1.5 rounded-full ${i === at ? 'bg-white' : 'bg-white/40'}`} />)}
+      </div>
+    </div>
+  );
+};
+
 export const Tile = ({ post, onOpen }: { post: Post; onOpen: () => void }) => (
   <button onClick={onOpen} aria-label={post.title} className="group relative aspect-[4/5] cursor-pointer overflow-hidden">
     <Media post={post} />
+    {images(post).length > 1 && <Copy size={18} className="absolute top-2 right-2 -scale-x-100 text-white drop-shadow" />}
     <span className="absolute inset-0 flex items-center justify-center bg-black/40 p-2 text-center text-sm font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
       {post.image && post.title}
     </span>
@@ -75,7 +101,7 @@ export const Viewer = ({ list, index, setIndex }: ViewerProps) => {
       {post && index !== null && (
         <div className="flex min-h-full flex-col md:h-full md:flex-row">
           <div className="md:hidden">{head}</div>
-          <div className="aspect-square bg-black md:aspect-auto md:min-w-0 md:flex-1"><Media post={post} contain /></div>
+          <div className="aspect-square bg-black md:aspect-auto md:min-w-0 md:flex-1">{images(post).length > 1 ? <Carousel key={post.slug} post={post} /> : <Media post={post} contain />}</div>
           <div className="flex flex-col md:w-[400px] md:border-l md:border-line">
             <div className="hidden md:block">{head}</div>
             <div className="order-2 flex items-start gap-3 p-3.5 md:order-1 md:flex-1 md:overflow-y-auto">

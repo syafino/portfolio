@@ -1,10 +1,9 @@
 // All site copy lives here. Edit this file, not the components.
 //
 // Photos: drop files into public/photos/ and set `image: '/photos/<name>'` on a post.
+// Pass an array of paths to make the post a carousel.
 // Posts without an image render a generated gradient tile.
 // Vercel's filesystem is case-sensitive, so the filename here must match exactly.
-
-import { Briefcase, Code, FileText, Mail } from 'lucide-react';
 
 export const socials = {
   github: 'https://github.com/syafino',
@@ -28,18 +27,26 @@ export const profile = {
 };
 
 export const highlights = [
-  { label: 'Resume', href: socials.resume, icon: FileText },
-  { label: 'GitHub', href: socials.github, icon: Code },
-  { label: 'LinkedIn', href: socials.linkedin, icon: Briefcase },
-  { label: 'Email', href: socials.email, icon: Mail },
+  { label: 'Resume', href: socials.resume },
+  { label: 'GitHub', href: socials.github },
+  { label: 'LinkedIn', href: socials.linkedin },
+  { label: 'Email', href: socials.email },
 ];
+
+// Messages: an AI stand-in that answers from this file (see api/chat.ts).
+export const chat = {
+  status: 'AI assistant · answers from my portfolio',
+  greeting: "Hey! I'm an AI version of Syafino. Ask me about my work, projects or what I'm up to.",
+  suggestions: ['What are you working on right now?', 'Tell me about your projects', 'What did you do at Elara Health?'],
+  error: "That didn't go through. Try again, or email me at syafino2@illinois.edu.",
+};
 
 export type Post = {
   slug: string;
   title: string;
   subtitle: string;
   date?: string;
-  image?: string;
+  image?: string | string[]; // several = swipeable carousel, first one is the grid tile
   caption: string;
   tags: string[];
   links?: { label: string; href: string }[];
@@ -69,6 +76,7 @@ export const posts: Post[] = [
   },
   {
     slug: 'agentic-ai',
+    image: ['/photos/agentic-ai-1.jpg', '/photos/agentic-ai-2.jpg'],
     title: 'Agentic AI @ UIUC',
     subtitle: 'Champaign, IL',
     date: 'Jan 2026 – Present',
@@ -100,6 +108,7 @@ export const posts: Post[] = [
     title: 'CIMB Niaga Bank',
     subtitle: 'Jakarta, Indonesia',
     date: 'Jul 2022 – Aug 2022',
+    image: '/photos/cimb.jpg',
     caption:
       'Throwback to my very first internship: two months as a data analysis intern at CIMB Niaga in Jakarta.\n\nI dug through transaction data in Excel and pandas to find trends for investment decisions, built the charts and reports that tracked market performance, and kept an eye on financial news for the portfolio team.',
     tags: ['Python', 'pandas', 'Excel', 'data analysis'],
