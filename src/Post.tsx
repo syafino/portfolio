@@ -16,7 +16,10 @@ const images = (post: Post) => [post.image ?? []].flat();
 
 const Media = ({ post, contain }: { post: Post; contain?: boolean }) =>
   post.image ? (
-    <img src={images(post)[0]} alt={post.title} loading="lazy" className={`h-full w-full ${contain ? 'object-contain' : 'object-cover'}`} />
+    <div className="@container flex h-full w-full flex-col">
+      {post.banner && <div className="bg-black p-[4cqw] text-center text-[5.5cqw] leading-tight font-bold text-white">{post.banner}</div>}
+      <img src={images(post)[0]} alt={post.title} loading="lazy" className={`min-h-0 w-full flex-1 ${contain ? 'object-contain' : 'object-cover'}`} />
+    </div>
   ) : (
     <div className="@container h-full w-full" style={{ background: gradients[[...post.slug].reduce((a, c) => a + c.charCodeAt(0), 0) % gradients.length] }}>
       <div className="flex h-full flex-col items-center justify-center gap-[3cqw] p-[8cqw] text-center text-white">
@@ -112,7 +115,7 @@ export const Viewer = ({ list, index, setIndex }: ViewerProps) => {
                 {post.links && (
                   <div className="mt-4 flex gap-2">
                     {post.links.map((l) => (
-                      <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="rounded-lg bg-hover px-4 py-1.5 font-semibold">{l.label} ↗</a>
+                      <a key={l.href} href={l.href} download={l.download} target={l.download ? undefined : '_blank'} rel="noreferrer" className={`rounded-lg px-4 py-1.5 font-semibold ${l.download ? 'bg-blue text-white' : 'bg-hover'}`}>{l.label}{l.download ? '' : ' ↗'}</a>
                     ))}
                   </div>
                 )}
@@ -125,7 +128,7 @@ export const Viewer = ({ list, index, setIndex }: ViewerProps) => {
                 </button>
                 <a href={socials.email} aria-label="Message me"><MessageCircle /></a>
                 <button onClick={share} aria-label="Copy link" className="cursor-pointer"><Send /></button>
-                <a href={socials.resume} target="_blank" rel="noreferrer" aria-label="Resume" className="ml-auto"><Bookmark /></a>
+                <a href={socials.resume} download aria-label="Download resume" className="ml-auto"><Bookmark /></a>
               </div>
               <p className="mt-2 text-xs text-muted" aria-live="polite">{copied ? 'Link copied' : post.date}</p>
             </div>

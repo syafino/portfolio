@@ -46,10 +46,24 @@ export type Post = {
   title: string;
   subtitle: string;
   date?: string;
+  banner?: string; // headline strip shown above the photo (used on reposts)
   image?: string | string[]; // several = swipeable carousel, first one is the grid tile
   caption: string;
   tags: string[];
-  links?: { label: string; href: string }[];
+  links?: { label: string; href: string; download?: boolean }[];
+};
+
+// Opens from the Resume nav item and highlight.
+// ponytail: the picture is a render of the PDF, so re-run this when resume.pdf changes:
+// sips -s format jpeg -s formatOptions 88 --resampleHeight 2200 public/resume.pdf --out public/photos/resume.jpg
+export const resume: Post = {
+  slug: 'resume',
+  title: 'Resume',
+  subtitle: 'One page · PDF',
+  image: '/photos/resume.jpg',
+  caption: "Here's the one-page version of everything on this profile. Grab the PDF below if you want to keep it or pass it along.",
+  tags: ['resume', 'hiring'],
+  links: [{ label: 'Download PDF', href: socials.resume, download: true }],
 };
 
 // Posts tab: experience, newest first.
@@ -96,6 +110,7 @@ export const posts: Post[] = [
   },
   {
     slug: 'acm',
+    image: '/photos/acm.jpg',
     title: 'ACM SIG Mobile',
     subtitle: 'Champaign, IL',
     date: 'Aug 2025 – Present',
@@ -201,6 +216,7 @@ export const tagged: Post[] = [
 export const reposts: Post[] = [
   {
     slug: 'win-agentx',
+    banner: '🥈 2nd place · Berkeley AgentX Hackathon',
     title: 'Berkeley AgentX Hackathon',
     subtitle: '🥈 2nd place · 40,000+ participants',
     caption:
@@ -210,6 +226,8 @@ export const reposts: Post[] = [
   },
   {
     slug: 'win-claude',
+    banner: '🥈 2nd place · Claude UIUC Hackathon',
+    image: '/photos/claude-hackathon.jpg',
     title: 'Claude UIUC Hackathon',
     subtitle: '🥈 2nd place',
     caption:
@@ -219,6 +237,7 @@ export const reposts: Post[] = [
   },
   {
     slug: 'win-math',
+    banner: '🥇 Gold medal · Math',
     title: 'Math Gold Medal',
     subtitle: '🥇 Gold medalist',
     // TODO: add the competition name and year
@@ -227,6 +246,7 @@ export const reposts: Post[] = [
   },
   {
     slug: 'win-deans-list',
+    banner: "Dean's List & Honors · UIUC",
     title: "Dean's List & Honors",
     subtitle: 'UIUC · GPA 3.88',
     caption:
@@ -235,6 +255,7 @@ export const reposts: Post[] = [
   },
   {
     slug: 'win-buildathon',
+    banner: 'Organizer · Agentic AI Buildathon',
     title: 'Agentic AI Buildathon',
     subtitle: 'Organizer · ~200 competitors',
     caption:
@@ -243,6 +264,7 @@ export const reposts: Post[] = [
   },
   {
     slug: 'win-scholarship',
+    banner: 'Scholarship awarded',
     title: 'Scholarship',
     subtitle: 'For C++ Web Apps: Checkers',
     caption: 'A checkers game written in C++ turned into a scholarship. Not a sentence I expected to write.',

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, Code, FileText, FolderGit2, Grid3x3, House, Link, Mail, Repeat2, Send, SquareUser, Trophy, type LucideIcon } from 'lucide-react';
-import { highlights, posts, profile, reposts, socials, tagged } from './content';
+import { highlights, posts, profile, reposts, resume, socials, tagged } from './content';
 import { Tile, Viewer } from './Post';
 import Chat, { type ChatState } from './Chat';
 import avatar from './assets/profile.jpg';
@@ -37,6 +37,10 @@ const App = () => {
   const [tab, setTab] = useState(readTab);
   const [open, setOpen] = useState<number | null>(null);
   const [chat, setChat] = useState<ChatState>('closed');
+  const [showResume, setShowResume] = useState(false);
+
+  // The expanded chat covers the page, so going anywhere else has to close it.
+  const home = () => { setChat('closed'); scrollTo(0, 0); };
 
   useEffect(() => {
     const on = () => setTab(readTab());
@@ -64,17 +68,28 @@ const App = () => {
   return (
     <>
       <nav className="fixed inset-x-0 bottom-0 z-10 flex justify-around border-t border-line bg-bg md:inset-y-0 md:right-auto md:w-[72px] md:flex-col md:justify-start md:gap-1 md:border-t-0 md:border-r md:px-3 md:py-2 xl:w-[244px]">
-        <a href="#posts" onClick={() => scrollTo(0, 0)} className="hidden px-3 pt-6 pb-5 font-script text-3xl md:block">
+        <a href="#posts" onClick={home} className="hidden px-3 pt-6 pb-5 font-script text-3xl md:block">
           <span className="xl:hidden">s</span>
           <span className="hidden xl:inline">{profile.username}</span>
         </a>
         {nav.map(({ label, icon: Icon, href }) => (
-          <a key={label} href={href} aria-label={label} target={href.startsWith('/') ? '_blank' : undefined} onClick={label === 'Messages' ? (e) => { e.preventDefault(); setChat('full'); } : href === '#posts' ? () => scrollTo(0, 0) : undefined} className="flex items-center gap-4 rounded-lg p-3 hover:bg-hover">
+          <a
+            key={label}
+            href={href}
+            aria-label={label}
+            onClick={(e) => {
+              if (label === 'Messages') { e.preventDefault(); setChat('full'); }
+              else if (label === 'Resume') { e.preventDefault(); setShowResume(true); }
+              else if (label === 'Home') home();
+              else setChat('closed');
+            }}
+            className="flex items-center gap-4 rounded-lg p-3 hover:bg-hover"
+          >
             <Icon />
             <span className="hidden text-base xl:inline">{label}</span>
           </a>
         ))}
-        <a href="#posts" aria-label="Profile" onClick={() => scrollTo(0, 0)} className="flex items-center gap-4 rounded-lg p-3 hover:bg-hover">
+        <a href="#posts" aria-label="Profile" onClick={home} className="flex items-center gap-4 rounded-lg p-3 hover:bg-hover">
           <img src={avatar} alt="" className="size-6 rounded-full object-cover ring-2 ring-fg" />
           <span className="hidden text-base font-bold xl:inline">Profile</span>
         </a>
@@ -108,7 +123,7 @@ const App = () => {
             {highlights.map(({ label, href }) => {
               const Icon = highlightIcons[label] ?? Link;
               return (
-              <a key={label} href={href} target="_blank" rel="noreferrer" className="flex shrink-0 flex-col items-center gap-2 text-xs font-semibold">
+              <a key={label} href={href} target="_blank" rel="noreferrer" onClick={href === socials.resume ? (e) => { e.preventDefault(); setShowResume(true); } : undefined} className="flex shrink-0 flex-col items-center gap-2 text-xs font-semibold">
                 <span className="rounded-full border border-line p-[3px]">
                   <span className="flex size-14 items-center justify-center rounded-full bg-hover md:size-[77px]"><Icon /></span>
                 </span>
@@ -141,6 +156,7 @@ const App = () => {
       </main>
 
       <Viewer list={tab.list} index={open} setIndex={setOpen} />
+      <Viewer list={[resume]} index={showResume ? 0 : null} setIndex={() => setShowResume(false)} />
       <Chat state={chat} setState={setChat} />
     </>
   );
