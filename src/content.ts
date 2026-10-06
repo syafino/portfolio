@@ -76,9 +76,10 @@ export const posts: Post[] = [
     title: 'Sylmu',
     subtitle: 'Co-founder',
     date: 'Now',
-    // TODO: say what Sylmu does and when it started
-    caption: "New chapter: I'm now a co-founder at Sylmu. Heads down building, more on this soon.",
-    tags: ['startup', 'cofounder'],
+    caption:
+      'New chapter: I\'m co-founding Sylmu. We make sure companies actually deliver on their contracts after they sign them.\n\nHere\'s the problem. Once a deal is signed, the people who negotiated it move on, and the teams who have to deliver often never read the contract. Renewals, SLAs, reporting deadlines and price changes end up in a PDF and in someone\'s memory. World Commerce & Contracting\'s 2026 research puts the cost at around 11% of a contract\'s value.\n\nSylmu reads your contracts, pulls out every commitment and turns each one into a task with an owner and a due date, sent to the team that has to act with the clause attached. You can also ask Mavis, our AI assistant, things like "what do we owe Acme this quarter?" and get an answer in seconds.\n\nThe demo is ready and we\'re looking for a few design partners. If your company signs more contracts than it can keep track of, email me.',
+    tags: ['startup', 'cofounder', 'contracts', 'AI'],
+    links: [{ label: 'Email me', href: socials.email }],
   },
   {
     slug: 'elara',

@@ -35,7 +35,7 @@ const readTab = () => tabs.find((t) => '#' + t.id === location.hash) ?? tabs[0];
 const App = () => {
   const [tab, setTab] = useState(readTab);
   const [open, setOpen] = useState<number | null>(null);
-  const [chat, setChat] = useState<ChatState>('closed');
+  const [chat, setChat] = useState<ChatState>(() => (matchMedia('(min-width: 768px)').matches ? 'open' : 'closed')); // desktop starts with the DM panel open
   const [story, setStory] = useState<number | null>(null);
 
   // The expanded chat covers the page, so going anywhere else has to close it.

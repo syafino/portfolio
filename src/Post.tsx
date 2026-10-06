@@ -121,7 +121,7 @@ export const Viewer = ({ list, index, setIndex }: ViewerProps) => {
                 {post.links && (
                   <div className="mt-4 flex gap-2">
                     {post.links.map((l) => (
-                      <a key={l.href} href={l.href} download={l.download} target={l.download ? undefined : '_blank'} rel="noreferrer" className={`rounded-lg px-4 py-1.5 font-semibold ${l.download ? 'bg-blue text-white' : 'bg-hover'}`}>{l.label}{l.download ? '' : ' ↗'}</a>
+                      <a key={l.href} href={l.href} download={l.download} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className={`rounded-lg px-4 py-1.5 font-semibold ${l.download ? 'bg-blue text-white' : 'bg-hover'}`}>{l.label}{l.href.startsWith('http') ? ' ↗' : ''}</a>
                     ))}
                   </div>
                 )}
