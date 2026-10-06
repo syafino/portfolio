@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Bookmark, ChevronLeft, ChevronRight, Heart, MessageCircle, Send, X } from 'lucide-react';
 import { profile, socials, type Post } from './content';
-import avatar from './assets/profile.png';
+import avatar from './assets/profile.jpg';
 
 const gradients = [
   'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)',

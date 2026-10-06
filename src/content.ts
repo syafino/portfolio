@@ -49,6 +49,7 @@ export type Post = {
 export const posts: Post[] = [
   {
     slug: 'sylmu',
+    image: '/photos/sylmu.jpg',
     title: 'Sylmu',
     subtitle: 'Co-founder',
     date: 'Now',
@@ -58,6 +59,7 @@ export const posts: Post[] = [
   },
   {
     slug: 'elara',
+    image: '/photos/elara.jpg',
     title: 'Elara Health',
     subtitle: 'San Francisco, CA',
     date: 'May 2026 – Aug 2026',
@@ -76,6 +78,7 @@ export const posts: Post[] = [
   },
   {
     slug: 'garg',
+    image: '/photos/garg.jpg',
     title: 'Garg Research Group',
     subtitle: 'UIUC · Champaign, IL',
     date: 'Sep 2025 – May 2026',

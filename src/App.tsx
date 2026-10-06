@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FileText, FolderGit2, Grid3x3, House, Repeat2, Send, SquareUser, Trophy } from 'lucide-react';
 import { highlights, posts, profile, reposts, socials, tagged } from './content';
 import { Tile, Viewer } from './Post';
-import avatar from './assets/profile.png';
+import avatar from './assets/profile.jpg';
 
 const tabs = [
   { id: 'posts', label: 'Posts', icon: Grid3x3, list: posts },
