@@ -27,6 +27,7 @@ Name: ${profile.name} (@${profile.username})
 Role: ${profile.category}
 GPA: ${profile.gpa}
 ${profile.bio.join('\n')}
+Background: ${chat.about}
 GitHub: ${socials.github}
 LinkedIn: ${socials.linkedin}
 Resume: ${socials.resume} on this site

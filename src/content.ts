@@ -51,6 +51,9 @@ export const highlights: { label: string; image?: string; text?: string; links: 
 // Messages: an AI stand-in that answers from this file (see api/chat.ts).
 export const chat = {
   status: 'AI assistant · answers from my portfolio',
+  // Background only the chat sees, on top of the posts below.
+  about:
+    "Syafino grew up in Jakarta and moved to the U.S. for school, UIUC to study statistics and computer science. His background spans applied AI, software engineering, research, and early-stage startups. He's worked as an AI engineer in healthcare, leads one of UIUC's major AI organizations, has built and won technical projects through hackathons, and is now moving toward entrepreneurship by building an early-stage startup focused on coordination and contract workflows.",
   greeting: "Hey! I'm an AI version of Syafino. Ask me about my work, projects or what I'm up to.",
   suggestions: ['What are you working on right now?', 'Tell me about your projects', 'What did you do at Elara Health?'],
   error: "That didn't go through. Try again, or email me at syafino2@illinois.edu.",
