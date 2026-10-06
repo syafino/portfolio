@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Briefcase, Code, FileText, FolderGit2, Grid3x3, House, Link, Mail, Repeat2, Send, SquareUser, Trophy, type LucideIcon } from 'lucide-react';
+import { Briefcase, Code, FileText, Grid3x3, House, Link, Mail, Repeat2, Send, SquareUser, type LucideIcon } from 'lucide-react';
 import { highlights, posts, profile, reposts, socials, tagged } from './content';
 import { Tile, Viewer } from './Post';
 import Chat, { type ChatState } from './Chat';
@@ -8,14 +8,12 @@ import avatar from './assets/profile.jpg';
 
 const tabs = [
   { id: 'posts', label: 'Posts', icon: Grid3x3, list: posts },
-  { id: 'reposts', label: 'Reposts', icon: Repeat2, list: reposts },
-  { id: 'tagged', label: 'Tagged', icon: SquareUser, list: tagged },
+  { id: 'reposts', label: 'Achievements', icon: Repeat2, list: reposts },
+  { id: 'tagged', label: 'Projects', icon: SquareUser, list: tagged },
 ];
 
 const nav = [
   { label: 'Home', icon: House, href: '#posts' },
-  { label: 'Projects', icon: FolderGit2, href: '#tagged' },
-  { label: 'Achievements', icon: Trophy, href: '#reposts' },
   { label: 'Messages', icon: Send, href: socials.email },
   { label: 'Resume', icon: FileText, href: socials.resume },
 ];
