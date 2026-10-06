@@ -1,257 +1,239 @@
-// All site copy lives here. Edit this file, not the pages.
+// All site copy lives here. Edit this file, not the components.
 //
-// Photos: drop files into public/photos/ and reference them below as '/photos/<name>'.
+// Photos: drop files into public/photos/ and set `image: '/photos/<name>'` on a post.
+// Posts without an image render a generated gradient tile.
 // Vercel's filesystem is case-sensitive, so the filename here must match exactly.
+
+import { Briefcase, Code, FileText, Mail } from 'lucide-react';
 
 export const socials = {
   github: 'https://github.com/syafino',
   linkedin: 'https://linkedin.com/in/syafino-yunalfian',
-  email: 'syafino2@illinois.edu',
-  phone: '+1 (312) 383 9339',
-  phoneHref: 'tel:+13123839339',
+  email: 'mailto:syafino2@illinois.edu',
   resume: '/resume.pdf',
 };
 
-export const hero = {
-  eyebrow: 'CS & Statistics @ UIUC · Class of 2027',
-  bio: "Co-founder at Sylmu, Vice President & AI Systems Lead at Agentic AI @ UIUC, and formerly an AI engineer intern at Elara Health. I build agents, RAG pipelines, and automation that runs in production, not just in demos. 2x hackathon runner-up. Math gold medalist.",
-  status: 'Now · Co-founder @ Sylmu · VP @ Agentic AI',
-};
-
-export const now = [
-  {
-    tint: 'card-sky',
-    title: 'Elara Health',
-    text: 'Building record-replay automation loops with AI fallback for healthcare portal workflows across Availity, Integra CUE, and Modio.',
-  },
-  {
-    tint: 'card-violet',
-    title: 'Agentic AI @ UIUC',
-    text: 'Running lectures and workshops at the largest AI club on campus, and shipping a multi-agent healthcare system with patient simulation and scheduling.',
-  },
-];
-
-export type Photo = { src: string; caption: string; group: 'travel' | 'hackathon'; wide?: boolean };
-
-export const photos: Photo[] = [
-  // Travel & life. Add as many as you like; set wide: true for a 2-column tile.
-  // { src: '/photos/tokyo.jpg', caption: 'Tokyo, 2025', group: 'travel', wide: true },
-  // { src: '/photos/campus.jpg', caption: 'Grainger, late night', group: 'travel' },
-
-  // Hackathons (uncomment once the files exist in public/photos/)
-  // { src: '/photos/agentx.jpg', caption: '2nd place · Berkeley AgentX · 40,000+ participants', group: 'hackathon' },
-  // { src: '/photos/claude-hackathon.jpg', caption: '2nd place · Claude UIUC Hackathon', group: 'hackathon' },
-];
-
-export const faq = [
-  { q: 'Where are you from?', a: 'TODO' },
-  { q: 'Why AI?', a: 'TODO' },
-  { q: 'What do you do outside of code?', a: 'TODO' },
-  { q: 'What are you looking for next?', a: 'TODO' },
-];
-
-export const skills = [
-  { title: 'Programming', items: ['Java', 'Python', 'TypeScript/JavaScript', 'SQL', 'NoSQL (MongoDB & Neo4j)', 'C/C++'] },
-  { title: 'AI/ML', items: ['PyTorch', 'TensorFlow', 'NumPy', 'Pandas', 'Scikit-learn', 'OpenCV', 'LangGraph', 'NLP', 'Claude Code', 'Codex'] },
-  { title: 'Backend, Cloud & Systems', items: ['Node.js', 'FastAPI/Flask', 'Docker', 'Git', 'PostgreSQL', 'PostGIS', 'Redis', 'Celery', 'REST API Design', 'Async Python', 'Linux', 'GCP', 'AWS', 'QDrant', 'Pinecone', 'Supabase'] },
-  { title: 'Web & Mobile', items: ['React.js', 'React Native', 'Flutter', 'HTML/CSS', 'MQTT', 'Raspberry Pi'] },
-];
-
-export const about = {
-  paragraphs: [
-    "I'm a Computer Science and Statistics student at the University of Illinois at Urbana-Champaign with a passion for building systems that automate repetitive tasks.",
-    "I build practical AI systems that actually run, not just papers or demos. I'm a co-founder at Sylmu, and this past summer I was an AI engineer intern at Elara Health, building automation loops with AI fallback for healthcare portals. At Agentic AI @ UIUC I'm Vice President & AI Systems Lead, where I ship RAG-based apps, optimize embeddings, and host local LLMs with Ollama to cut API costs and boost privacy.",
-    "I've built everything from on-device CV models for Framelight, a real-time mobile composition assistant, to a persistent MCP memory server that won 2nd place at the Claude UIUC Hackathon, and a Text-to-SQL evaluation agent that took 2nd place at the Berkeley AgentX Hackathon.",
-    'My toolbox is Python, PyTorch, TensorFlow, LangChain, FastAPI, React Native, TypeScript, Docker, and Postgres. I care about performance, reproducibility, and deployment.',
+export const profile = {
+  username: 'syafino',
+  name: 'Syafino Yunalfian',
+  category: 'AI Engineer',
+  bio: [
+    'Co-founder @ Sylmu · VP & AI Systems Lead @ Agentic AI UIUC',
+    "CS & Statistics @ UIUC '27",
+    'I build agents, RAG pipelines and automation that runs in production, not just in demos',
+    '📍 Champaign, IL',
   ],
-  tags: ['Champaign, IL', 'Class of 2027', "Dean's List", 'GPA 3.88'],
+  link: { label: 'github.com/syafino', href: socials.github },
+  gpa: '3.88',
 };
 
-export const education = {
-  school: 'University of Illinois at Urbana-Champaign',
-  degree: 'B.S. Computer Science & Statistics',
-  meta: "Expected May 2027 · GPA 3.88/4.00 · Dean's List · Honors Program",
-  coursework: ['Applied Machine Learning', 'Text-Information Systems', 'Database Systems', 'Computer Systems', 'Data Structures & Algorithms', 'Linear Algebra', 'Discrete Math', 'Calculus'],
+export const highlights = [
+  { label: 'Resume', href: socials.resume, icon: FileText },
+  { label: 'GitHub', href: socials.github, icon: Code },
+  { label: 'LinkedIn', href: socials.linkedin, icon: Briefcase },
+  { label: 'Email', href: socials.email, icon: Mail },
+];
+
+export type Post = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  date?: string;
+  image?: string;
+  caption: string;
+  tags: string[];
+  links?: { label: string; href: string }[];
 };
 
-export const experience = [
+// Posts tab: experience, newest first.
+export const posts: Post[] = [
+  {
+    slug: 'sylmu',
+    title: 'Sylmu',
+    subtitle: 'Co-founder',
+    date: 'Now',
+    // TODO: say what Sylmu does and when it started
+    caption: "New chapter: I'm now a co-founder at Sylmu. Heads down building, more on this soon.",
+    tags: ['startup', 'cofounder'],
+  },
   {
     slug: 'elara',
-    company: 'Elara Health, Inc',
-    role: 'AI Engineer Intern',
-    where: 'San Francisco, CA',
-    dates: 'May 2026 – Aug 2026',
-    bullets: [
-      'Built record-replay automation loops with AI fallback for healthcare portal workflows, connecting carry-set handoff, chain mapping, and loop runner logic across Availity, Integra CUE, and Modio',
-      'Developed eligibility classifiers and error-handling logic to distinguish found, not-found, and portal-error states, allowing workflows to traverse payer candidates without premature aborts',
-      'Designed and tested UI + workflow controls for long-running automation, including traversal history, editable candidate lists, terminal result screens, and stop controls for AI-assisted runs',
-      'Conducted sales and customer calls to understand workflow pain points and translate feedback into iterative product and automation improvements',
-      'Participated in investor calls and product discussions, synthesizing customer feedback and market insights to inform product direction',
-    ],
+    title: 'Elara Health',
+    subtitle: 'San Francisco, CA',
+    date: 'May 2026 – Aug 2026',
+    caption:
+      "Spent my summer in San Francisco as an AI engineer intern at Elara Health. Four months of building record-replay automation with an AI fallback for healthcare portals like Availity, Integra CUE and Modio.\n\nA big chunk of it was teaching the workflows to tell found, not found and portal error apart, so a run could keep going through payer candidates instead of giving up early. I also built the controls for long-running runs: traversal history, editable candidate lists, result screens and a stop button.\n\nThe part I didn't expect to enjoy this much was sitting in on sales, customer and investor calls and turning what I heard into what we built next.",
+    tags: ['AI agents', 'automation', 'healthcare', 'internship'],
   },
   {
     slug: 'agentic-ai',
-    company: 'Agentic AI @ UIUC',
-    role: 'Vice President & AI Systems Lead',
-    where: 'Champaign, IL',
-    dates: 'Jan 2026 – Present',
-    bullets: [
-      'Held lectures and workshops for students to learn about AI and apply it to their own projects at the largest AI club on campus',
-      'Built a domain-specific RAG pipeline (LangChain, Qdrant, PubMedBERT, BGE) for clinically grounded, source-traceable LLM responses',
-      'Developed a multi-agent system with a patient simulation agent and automated scheduling, backed by persistent user context',
-      'Optimized inference with Groq for near-instant, zero-cost, high-throughput healthcare queries',
-      'Orchestrated local LLM hosting via Ollama, eliminating external API costs while keeping data private',
-    ],
+    title: 'Agentic AI @ UIUC',
+    subtitle: 'Champaign, IL',
+    date: 'Jan 2026 – Present',
+    caption:
+      "Hey, this is me as Vice President & AI Systems Lead at Agentic AI @ UIUC, the largest AI club on campus. I've been doing this since January 2026.\n\nI run lectures and workshops so students can learn AI and actually use it in their own projects. On the build side I made a RAG pipeline for clinically grounded answers you can trace back to a source, and a multi-agent system with a patient simulation agent and automated scheduling.\n\nWe run inference on Groq to keep it fast, and host local models with Ollama so there's no API bill and the data stays private.",
+    tags: ['LangChain', 'Qdrant', 'PubMedBERT', 'Groq', 'Ollama'],
   },
   {
     slug: 'garg',
-    company: 'Garg Research Group · UIUC',
-    role: 'Software Engineer & Automation Research Assistant',
-    where: 'Champaign, IL',
-    dates: 'Sep 2025 – May 2026',
-    bullets: [
-      'Built and deployed full-stack automation software for a device that reduced cement R3 reactivity test time from 7 days to 30 minutes using React.js, Node.js, PostgreSQL, and Python',
-      'Integrated Raspberry Pi with real-time camera analysis (OpenCV), automated data acquisition, and Wi-Fi provisioning through a custom hotspot interface',
-      'Deployed GCP Cloud SQL for experiment data management, enabling MQTT-based device communication and secure user tracking via GUI; frontend deployed on Vercel',
-      'Architected cloud-deployed MQTT relay backend (Express.js + Socket.io on Fly.io) with a real-time 5-stage process monitoring dashboard and Google OAuth 2.0',
-    ],
+    title: 'Garg Research Group',
+    subtitle: 'UIUC · Champaign, IL',
+    date: 'Sep 2025 – May 2026',
+    caption:
+      "Nine months as a software engineer and automation research assistant at the Garg Research Group at UIUC.\n\nI built and deployed the full-stack software for a device that takes the cement R3 reactivity test from 7 days down to 30 minutes. That meant a Raspberry Pi doing real-time camera analysis with OpenCV, Wi-Fi setup through its own hotspot, MQTT between the device and the cloud, and a live dashboard that tracks all 5 stages of the process.\n\nProbably the most hardware I've ever touched for a software job.",
+    tags: ['React', 'Node.js', 'PostgreSQL', 'Raspberry Pi', 'OpenCV', 'MQTT', 'GCP'],
   },
   {
     slug: 'acm',
-    company: 'ACM SIG Mobile',
-    role: 'Technical Lead, Backend',
-    where: 'Champaign, IL',
-    dates: 'Aug 2025 – Present',
-    bullets: [
-      'Lead backend development for an 8-member team, mentoring on Flutter, Dart, Android Studio, and widget-based UI',
-      'Designed relational database architecture (PostgreSQL) for a UIUC student services app; mentored UML/ER diagrams and RESTful API patterns',
-    ],
+    title: 'ACM SIG Mobile',
+    subtitle: 'Champaign, IL',
+    date: 'Aug 2025 – Present',
+    caption:
+      "Leading the backend for an 8-person team at ACM SIG Mobile since August 2025. We're building a student services app for UIUC.\n\nI designed the PostgreSQL schema, and a lot of my time goes into mentoring: Flutter and Dart, ER diagrams, and how to design a REST API that doesn't fall apart later.",
+    tags: ['Flutter', 'Dart', 'PostgreSQL', 'REST API'],
   },
   {
     slug: 'cimb',
-    company: 'CIMB Niaga Bank',
-    role: 'Data Analysis Intern',
-    where: 'Jakarta, Indonesia',
-    dates: 'Jul 2022 – Aug 2022',
-    bullets: [
-      'Analyzed transaction datasets using Excel and Python (pandas) to identify trends and support investment decisions',
-      'Created data visualizations and reports tracking market performance; monitored financial news for portfolio insights',
-    ],
+    title: 'CIMB Niaga Bank',
+    subtitle: 'Jakarta, Indonesia',
+    date: 'Jul 2022 – Aug 2022',
+    caption:
+      'Throwback to my very first internship: two months as a data analysis intern at CIMB Niaga in Jakarta.\n\nI dug through transaction data in Excel and pandas to find trends for investment decisions, built the charts and reports that tracked market performance, and kept an eye on financial news for the portfolio team.',
+    tags: ['Python', 'pandas', 'Excel', 'data analysis'],
   },
 ];
 
-export type Project = {
-  title: string;
-  award?: string;
-  stat?: string;
-  tint?: string;
-  description: string;
-  tech: string[];
-  code?: string;
-  demo?: string;
-};
-
-export const projects: Project[] = [
+// Tagged tab: projects.
+export const tagged: Post[] = [
   {
+    slug: 'text-to-sql',
     title: 'Text-to-SQL Evaluation Agent',
-    award: '2nd place · Berkeley AgentX · 40,000+ participants',
-    stat: '2nd',
-    tint: 'card-sky',
-    description: 'Sandboxed SQL-evaluation framework (safety, syntax, schema, logic) with pre-execution hallucination checks, reproducible Dockerized Postgres environments, multi-dimensional scoring, automated error taxonomy, and web/CLI interfaces for observable, testable agent evaluations.',
-    tech: ['Python', 'PostgreSQL', 'sqlglot', 'Docker', 'LLM'],
-    code: 'https://github.com/ashcastelinocs124/text-2-sql-agent',
+    subtitle: '2nd place · Berkeley AgentX',
+    caption:
+      "Built this for the Berkeley AgentX Hackathon and it took 2nd place out of 40,000+ participants.\n\nIt's a sandboxed framework that grades text-to-SQL agents on safety, syntax, schema and logic. It checks for hallucinations before anything executes, spins up reproducible Postgres environments in Docker, and sorts every failure into an error taxonomy. You can use it from the web or the CLI.",
+    tags: ['Python', 'PostgreSQL', 'sqlglot', 'Docker', 'LLM'],
+    links: [{ label: 'Code', href: 'https://github.com/ashcastelinocs124/text-2-sql-agent' }],
   },
   {
+    slug: 'mcp-memory',
     title: 'MCP Server: AI Memory & Reasoning',
-    award: '2nd place · Claude UIUC Hackathon',
-    stat: '2nd',
-    tint: 'card-violet',
-    description: 'Persistent long-term AI memory system enabling structured user profiling and contextual recall.',
-    tech: ['TypeScript', 'Node.js', 'JSON-RPC'],
-    code: 'https://github.com/Build-for-fun/claude-hackathon',
+    subtitle: '2nd place · Claude UIUC Hackathon',
+    caption:
+      'What if your AI actually remembered you? This is an MCP server that gives a model persistent long-term memory, so it can build a structured profile of the user and recall the right context later. Took 2nd place at the Claude UIUC Hackathon.',
+    tags: ['TypeScript', 'Node.js', 'JSON-RPC'],
+    links: [{ label: 'Code', href: 'https://github.com/Build-for-fun/claude-hackathon' }],
   },
   {
+    slug: 'buildathon',
     title: 'Agentic AI Buildathon',
-    award: 'Organizer · ~200 competitors · Google & GIES sponsors',
-    stat: '~200',
-    tint: 'card-peach',
-    description: 'Led planning and execution of a business-focused Agentic AI buildathon, partnering with campus AI organizations and the Big Ten AI Conference to give business students an accessible path into agentic AI.',
-    tech: ['Event Strategy', 'Sponsorship', 'Community'],
+    subtitle: 'Organizer · ~200 competitors',
+    caption:
+      'This one I organized instead of competing in. I led planning and execution for a business-focused Agentic AI buildathon with around 200 competitors, sponsored by Google and GIES. We partnered with campus AI orgs and the Big Ten AI Conference so business students had an easy way into agentic AI.',
+    tags: ['Event Strategy', 'Sponsorship', 'Community'],
   },
   {
-    title: 'Physical World Scarcity Terminal (PWST)',
-    description: 'Bloomberg-style terminal that monitors water, energy, and logistics signals to detect disruptions before they hit markets. Distributed async pipeline ingesting 8+ external APIs with Pydantic validation, PostGIS time-series storage, a Celery + Redis refresh queue, and real-time event correlation with VADER sentiment.',
-    tech: ['Python', 'FastAPI', 'Streamlit', 'PostGIS', 'Celery', 'Redis', 'Docker'],
-    code: 'https://github.com/syafino/Physical-World-Scarcity-Terminal',
+    slug: 'pwst',
+    title: 'Physical World Scarcity Terminal',
+    subtitle: 'Python · FastAPI · PostGIS',
+    caption:
+      'Think Bloomberg terminal, but for water, energy and logistics. PWST watches physical-world signals to catch disruptions before they hit markets.\n\nUnder the hood it pulls from 8+ external APIs through an async pipeline, validates everything with Pydantic, stores time series in PostGIS, refreshes on a Celery + Redis queue, and correlates events in real time with VADER sentiment.',
+    tags: ['Python', 'FastAPI', 'Streamlit', 'PostGIS', 'Celery', 'Redis', 'Docker'],
+    links: [{ label: 'Code', href: 'https://github.com/syafino/Physical-World-Scarcity-Terminal' }],
   },
   {
+    slug: 'aceit',
     title: 'AceIt: Interview Teleprompter',
-    description: 'Invisible floating overlay that displays bullet points near your webcam so you maintain eye contact during interviews.',
-    tech: ['Python', 'Tkinter', 'CLI'],
-    code: 'https://github.com/syafino/AceIt',
+    subtitle: 'Python · Tkinter',
+    caption:
+      'Made this because I kept looking away from the camera in interviews. AceIt is an invisible floating overlay that puts your bullet points right next to your webcam, so you keep eye contact the whole time.',
+    tags: ['Python', 'Tkinter', 'CLI'],
+    links: [{ label: 'Code', href: 'https://github.com/syafino/AceIt' }],
   },
   {
+    slug: 'framelight',
     title: 'Framelight: AI Camera Assistant',
-    description: 'On-device ML models for real-time visual guidance in mobile photo composition.',
-    tech: ['PyTorch', 'TensorFlow', 'OpenCV', 'React Native'],
-    demo: 'https://youtu.be/dxQS8v8iZco',
+    subtitle: 'PyTorch · React Native',
+    caption:
+      'Framelight helps you frame a better photo while you are still taking it. The models run on-device and give real-time visual guidance on composition, right in the camera view.',
+    tags: ['PyTorch', 'TensorFlow', 'OpenCV', 'React Native'],
+    links: [{ label: 'Demo', href: 'https://youtu.be/dxQS8v8iZco' }],
   },
   {
+    slug: 'healthcare-assistant',
     title: 'Multi-Agent Healthcare Assistant',
-    description: 'Multi-agent ML pipelines using GPT-5 and MedPaLM APIs with RAG for personalized healthcare guidance.',
-    tech: ['Python', 'LangGraph', 'RAG', 'Flask'],
+    subtitle: 'LangGraph · RAG',
+    caption:
+      'A multi-agent pipeline that uses GPT-5 and MedPaLM with RAG to give personalized healthcare guidance. Each agent has its own job and they hand off to each other through LangGraph.',
+    tags: ['Python', 'LangGraph', 'RAG', 'Flask'],
   },
   {
+    slug: 'pokesight',
     title: 'PokéSight: Smart Pokémon Map',
-    description: 'Data-driven web app for strategic Pokémon search based on type, rarity, and stats.',
-    tech: ['Python', 'FastAPI', 'PostgreSQL', 'GCP'],
-    code: 'https://github.com/syafino/Pokesight',
+    subtitle: 'FastAPI · PostgreSQL · GCP',
+    caption:
+      'Gotta find them all, efficiently. PokéSight is a data-driven web app for searching Pokémon strategically by type, rarity and stats.',
+    tags: ['Python', 'FastAPI', 'PostgreSQL', 'GCP'],
+    links: [{ label: 'Code', href: 'https://github.com/syafino/Pokesight' }],
   },
   {
+    slug: 'checkers',
     title: 'C++ Web Apps: Checkers',
-    award: 'Scholarship awarded',
-    description: 'Desktop-focused web game using CGI hosted on Linux servers with AJAX and a C++ backend.',
-    tech: ['C++', 'HTML', 'JavaScript', 'Linux'],
+    subtitle: 'Scholarship awarded',
+    caption:
+      'An old one I still like: a web checkers game with a C++ backend, served over CGI from a Linux server with AJAX on the front. It ended up earning me a scholarship.',
+    tags: ['C++', 'HTML', 'JavaScript', 'Linux'],
   },
 ];
 
-export const nav = [
-  { name: 'Work', href: '#work' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Life', href: '#life' },
-  { name: 'Ask me', href: '#ask' },
+// Reposts tab: achievements.
+export const reposts: Post[] = [
+  {
+    slug: 'win-agentx',
+    title: 'Berkeley AgentX Hackathon',
+    subtitle: '🥈 2nd place · 40,000+ participants',
+    caption:
+      'Still a little unreal. Our Text-to-SQL Evaluation Agent took 2nd place at the Berkeley AgentX Hackathon, out of more than 40,000 participants.',
+    tags: ['hackathon', 'AgentX', 'Berkeley'],
+    links: [{ label: 'Code', href: 'https://github.com/ashcastelinocs124/text-2-sql-agent' }],
+  },
+  {
+    slug: 'win-claude',
+    title: 'Claude UIUC Hackathon',
+    subtitle: '🥈 2nd place',
+    caption:
+      '2nd place at the Claude UIUC Hackathon with our MCP server for persistent AI memory and reasoning. Great weekend, very little sleep.',
+    tags: ['hackathon', 'Claude', 'MCP'],
+    links: [{ label: 'Code', href: 'https://github.com/Build-for-fun/claude-hackathon' }],
+  },
+  {
+    slug: 'win-math',
+    title: 'Math Gold Medal',
+    subtitle: '🥇 Gold medalist',
+    // TODO: add the competition name and year
+    caption: 'Before the code there was math. Came home with a gold medal, and it is still one of the wins I am proudest of.',
+    tags: ['math', 'goldmedal'],
+  },
+  {
+    slug: 'win-deans-list',
+    title: "Dean's List & Honors",
+    subtitle: 'UIUC · GPA 3.88',
+    caption:
+      "Made the Dean's List at UIUC and I'm part of the Honors Program, holding a 3.88 GPA in Computer Science & Statistics.",
+    tags: ['UIUC', 'deanslist', 'honors'],
+  },
+  {
+    slug: 'win-buildathon',
+    title: 'Agentic AI Buildathon',
+    subtitle: 'Organizer · ~200 competitors',
+    caption:
+      'We pulled it off. Around 200 competitors showed up to the Agentic AI Buildathon I helped organize, with Google and GIES as sponsors.',
+    tags: ['buildathon', 'AgenticAI', 'UIUC'],
+  },
+  {
+    slug: 'win-scholarship',
+    title: 'Scholarship',
+    subtitle: 'For C++ Web Apps: Checkers',
+    caption: 'A checkers game written in C++ turned into a scholarship. Not a sentence I expected to write.',
+    tags: ['scholarship', 'cpp'],
+  },
 ];
-
-// Hero terminal. Lines starting with "$ " are typed; others print as output.
-export const terminal = [
-  '$ whoami',
-  'syafino — AI engineer, CS & Statistics @ UIUC',
-  '$ cat now.txt',
-  'Sylmu               Co-founder',
-  'Agentic AI @ UIUC   VP & AI Systems Lead',
-  'Garg Research       Automation RA',
-  '$ ls wins/',
-  '2nd_berkeley_agentx_40k+    2nd_claude_uiuc_hackathon',
-  '$ echo $STACK',
-  'python typescript pytorch langgraph fastapi postgres docker gcp',
-];
-
-export const layers = [
-  { n: 4, title: 'Agents & RAG', text: 'The layer people interact with. Multi-agent systems, retrieval pipelines, and inference tuned to feel instant.', tags: ['LangGraph', 'Qdrant', 'Groq', 'Claude Code', 'PubMedBERT'] },
-  { n: 3, title: 'Backend & data', text: 'APIs and queues that keep the agents fed. Async Python, task pipelines, time-series and geospatial storage.', tags: ['FastAPI', 'PostgreSQL', 'PostGIS', 'Redis', 'Celery', 'Docker'] },
-  { n: 2, title: 'Systems & devices', text: 'Where software meets hardware. Cameras, sensors, provisioning, and cloud relays for lab equipment.', tags: ['Raspberry Pi', 'OpenCV', 'MQTT', 'GCP', 'Linux'] },
-  { n: 1, title: 'Foundations', text: 'The fundamentals underneath it all. Algorithms, statistics, and the languages I reach for first.', tags: ['Java', 'C/C++', 'DSA', 'Statistics', 'Linear Algebra'] },
-];
-
-export const numbers = [
-  { stat: '7d → 30min', title: 'Cement R3 test time', text: 'Full-stack automation for a lab device at the Garg Research Group, from Raspberry Pi to cloud dashboard.' },
-  { stat: '3.88', title: 'GPA at UIUC', text: "Computer Science & Statistics, Dean's List, Honors Program. Class of 2027." },
-  { stat: '~200', title: 'Buildathon competitors', text: 'Organized the Agentic AI Buildathon with Google and GIES as primary sponsors.' },
-];
-
-export const cta = {
-  title: "Let's build something",
-  accent: 'together.',
-  text: 'Open to AI engineering roles, research collaborations, and interesting side projects.',
-};
