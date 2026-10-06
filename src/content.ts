@@ -158,6 +158,7 @@ export const tagged: Post[] = [
   },
   {
     slug: 'buildathon',
+    image: '/photos/buildathon.jpg',
     title: 'Agentic AI Buildathon',
     subtitle: 'Organizer · ~200 competitors',
     caption:
@@ -252,16 +253,8 @@ export const reposts: Post[] = [
     tags: ['math', 'goldmedal', 'olympiad'],
   },
   {
-    slug: 'win-deans-list',
-    banner: "Dean's List & Honors · UIUC",
-    title: "Dean's List & Honors",
-    subtitle: 'UIUC · GPA 3.88',
-    caption:
-      "Made the Dean's List at UIUC and I'm part of the Honors Program, holding a 3.88 GPA in Computer Science & Statistics.",
-    tags: ['UIUC', 'deanslist', 'honors'],
-  },
-  {
     slug: 'win-buildathon',
+    image: '/photos/buildathon.jpg',
     banner: 'Organizer · Agentic AI Buildathon',
     title: 'Agentic AI Buildathon',
     subtitle: 'Organizer · ~200 competitors',
