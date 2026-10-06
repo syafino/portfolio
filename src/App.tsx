@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, Code, FileText, FolderGit2, Grid3x3, House, Link, Mail, Repeat2, Send, SquareUser, Trophy, type LucideIcon } from 'lucide-react';
-import { highlights, posts, profile, reposts, resume, socials, tagged } from './content';
+import { highlights, posts, profile, reposts, socials, tagged } from './content';
 import { Tile, Viewer } from './Post';
 import Chat, { type ChatState } from './Chat';
+import Story from './Story';
 import avatar from './assets/profile.jpg';
 
 const tabs = [
@@ -37,7 +38,7 @@ const App = () => {
   const [tab, setTab] = useState(readTab);
   const [open, setOpen] = useState<number | null>(null);
   const [chat, setChat] = useState<ChatState>('closed');
-  const [showResume, setShowResume] = useState(false);
+  const [story, setStory] = useState<number | null>(null);
 
   // The expanded chat covers the page, so going anywhere else has to close it.
   const home = () => { setChat('closed'); scrollTo(0, 0); };
@@ -79,7 +80,7 @@ const App = () => {
             aria-label={label}
             onClick={(e) => {
               if (label === 'Messages') { e.preventDefault(); setChat('full'); }
-              else if (label === 'Resume') { e.preventDefault(); setShowResume(true); }
+              else if (label === 'Resume') { e.preventDefault(); setStory(0); }
               else if (label === 'Home') home();
               else setChat('closed');
             }}
@@ -120,15 +121,15 @@ const App = () => {
           <div className="px-4 pb-5 md:hidden">{bio}</div>
 
           <div className="flex gap-4 overflow-x-auto px-4 pb-4 md:gap-9 md:px-11 md:pb-11">
-            {highlights.map(({ label, href }) => {
+            {highlights.map(({ label }, i) => {
               const Icon = highlightIcons[label] ?? Link;
               return (
-              <a key={label} href={href} target="_blank" rel="noreferrer" onClick={href === socials.resume ? (e) => { e.preventDefault(); setShowResume(true); } : undefined} className="flex shrink-0 flex-col items-center gap-2 text-xs font-semibold">
-                <span className="rounded-full border border-line p-[3px]">
-                  <span className="flex size-14 items-center justify-center rounded-full bg-hover md:size-[77px]"><Icon /></span>
-                </span>
-                {label}
-              </a>
+                <button key={label} onClick={() => setStory(i)} className="flex shrink-0 cursor-pointer flex-col items-center gap-2 text-xs font-semibold">
+                  <span className="rounded-full border border-line p-[3px]">
+                    <span className="flex size-14 items-center justify-center rounded-full bg-hover md:size-[77px]"><Icon /></span>
+                  </span>
+                  {label}
+                </button>
               );
             })}
           </div>
@@ -156,7 +157,7 @@ const App = () => {
       </main>
 
       <Viewer list={tab.list} index={open} setIndex={setOpen} />
-      <Viewer list={[resume]} index={showResume ? 0 : null} setIndex={() => setShowResume(false)} />
+      <Story index={story} setIndex={setStory} />
       <Chat state={chat} setState={setChat} />
     </>
   );

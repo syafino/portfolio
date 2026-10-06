@@ -9,6 +9,7 @@ export const socials = {
   github: 'https://github.com/syafino',
   linkedin: 'https://linkedin.com/in/syafino-yunalfian',
   email: 'mailto:syafino2@illinois.edu',
+  phone: 'tel:+13123839339',
   resume: '/resume.pdf',
 };
 
@@ -26,11 +27,25 @@ export const profile = {
   gpa: '3.88',
 };
 
-export const highlights = [
-  { label: 'Resume', href: socials.resume },
-  { label: 'GitHub', href: socials.github },
-  { label: 'LinkedIn', href: socials.linkedin },
-  { label: 'Email', href: socials.email },
+// Highlights open as stories. `image` fills the story with link stickers above it;
+// without one the story is a gray card with `text` and the stickers.
+// ponytail: resume.jpg is a render of the PDF, so re-run this when resume.pdf changes:
+// sips -s format jpeg -s formatOptions 88 --resampleHeight 2200 public/resume.pdf --out public/photos/resume.jpg
+type Sticker = { label: string; href: string; download?: boolean };
+export const highlights: { label: string; image?: string; text?: string; links: Sticker[] }[] = [
+  { label: 'Resume', image: '/photos/resume.jpg', links: [{ label: 'Download PDF', href: socials.resume, download: true }] },
+  { label: 'GitHub', image: '/photos/github.jpg', links: [{ label: 'github.com/syafino', href: socials.github }] },
+  { label: 'LinkedIn', image: '/photos/linkedin.jpg', links: [{ label: 'linkedin.com/in/syafino-yunalfian', href: socials.linkedin }] },
+  {
+    label: 'Email',
+    text: 'Get in touch',
+    links: [
+      { label: 'syafino2@illinois.edu', href: socials.email },
+      { label: '+1 (312) 383 9339', href: socials.phone },
+      { label: 'linkedin.com/in/syafino-yunalfian', href: socials.linkedin },
+      { label: 'github.com/syafino', href: socials.github },
+    ],
+  },
 ];
 
 // Messages: an AI stand-in that answers from this file (see api/chat.ts).
@@ -50,20 +65,7 @@ export type Post = {
   image?: string | string[]; // several = swipeable carousel, first one is the grid tile
   caption: string;
   tags: string[];
-  links?: { label: string; href: string; download?: boolean }[];
-};
-
-// Opens from the Resume nav item and highlight.
-// ponytail: the picture is a render of the PDF, so re-run this when resume.pdf changes:
-// sips -s format jpeg -s formatOptions 88 --resampleHeight 2200 public/resume.pdf --out public/photos/resume.jpg
-export const resume: Post = {
-  slug: 'resume',
-  title: 'Resume',
-  subtitle: 'One page · PDF',
-  image: '/photos/resume.jpg',
-  caption: "Here's the one-page version of everything on this profile. Grab the PDF below if you want to keep it or pass it along.",
-  tags: ['resume', 'hiring'],
-  links: [{ label: 'Download PDF', href: socials.resume, download: true }],
+  links?: Sticker[];
 };
 
 // Posts tab: experience, newest first.
@@ -237,12 +239,13 @@ export const reposts: Post[] = [
   },
   {
     slug: 'win-math',
-    banner: '🥇 Gold medal · Math',
+    banner: '🥇 Gold medal · National Math Olympiad',
+    image: '/photos/math-gold.jpg',
     title: 'Math Gold Medal',
-    subtitle: '🥇 Gold medalist',
-    // TODO: add the competition name and year
-    caption: 'Before the code there was math. Came home with a gold medal, and it is still one of the wins I am proudest of.',
-    tags: ['math', 'goldmedal'],
+    subtitle: '🥇 Olimpiade Sains Siswa Indonesia',
+    date: 'Feb 2022',
+    caption: 'Before the code there was math. Gold medal at the national level in Mathematics at the Olimpiade Sains Siswa Indonesia back in February 2022, and it is still one of the wins I am proudest of.',
+    tags: ['math', 'goldmedal', 'olympiad'],
   },
   {
     slug: 'win-deans-list',
@@ -265,9 +268,15 @@ export const reposts: Post[] = [
   {
     slug: 'win-scholarship',
     banner: 'Scholarship awarded',
+    image: ['/photos/scholarship-1.jpg', '/photos/scholarship-2.jpg'],
     title: 'Scholarship',
-    subtitle: 'For C++ Web Apps: Checkers',
-    caption: 'A checkers game written in C++ turned into a scholarship. Not a sentence I expected to write.',
-    tags: ['scholarship', 'cpp'],
+    subtitle: 'Parkland College honors projects',
+    date: 'Fall 2024',
+    caption: 'Two honors projects from my time at Parkland College: a paper on the history and basics of Fourier series, and a checkers game with a C++ backend. A checkers game turning into a scholarship is not a sentence I expected to write.',
+    tags: ['scholarship', 'honors', 'cpp', 'math'],
+    links: [
+      { label: 'Fourier paper', href: 'https://spark.parkland.edu/ah/341' },
+      { label: 'Checkers', href: 'https://spark.parkland.edu/ah/340' },
+    ],
   },
 ];

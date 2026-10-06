@@ -32,3 +32,8 @@ body {
 }
 
 .story-ring { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+/* Story progress bar: fills over 8s, then the story advances. Paused while hovering or pressing. */
+@keyframes story { from { width: 0; } to { width: 100%; } }
+.story-bar { animation: story 8s linear forwards; }
+.story:hover .story-bar, .story:active .story-bar { animation-play-state: paused; }

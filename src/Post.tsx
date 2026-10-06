@@ -14,10 +14,13 @@ const gradients = [
 
 const images = (post: Post) => [post.image ?? []].flat();
 
+const Banner = ({ post }: { post: Post }) =>
+  post.banner ? <div className="bg-black p-[min(4cqw,14px)] text-center text-[min(5.5cqw,20px)] leading-tight font-bold text-white">{post.banner}</div> : null;
+
 const Media = ({ post, contain }: { post: Post; contain?: boolean }) =>
   post.image ? (
     <div className="@container flex h-full w-full flex-col">
-      {post.banner && <div className="bg-black p-[4cqw] text-center text-[5.5cqw] leading-tight font-bold text-white">{post.banner}</div>}
+      <Banner post={post} />
       <img src={images(post)[0]} alt={post.title} loading="lazy" className={`min-h-0 w-full flex-1 ${contain ? 'object-contain' : 'object-cover'}`} />
     </div>
   ) : (
@@ -37,7 +40,9 @@ const Carousel = ({ post }: { post: Post }) => {
   const arrow = 'absolute top-1/2 flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/80 text-black';
 
   return (
-    <div className="relative h-full w-full">
+    <div className="@container flex h-full w-full flex-col">
+      <Banner post={post} />
+      <div className="relative min-h-0 flex-1">
       <div ref={ref} onScroll={(e) => setAt(Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))} className="flex h-full snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]">
         {all.map((src, i) => (
           <img key={src} src={src} alt={`${post.title}, photo ${i + 1} of ${all.length}`} className="h-full w-full shrink-0 snap-center object-contain" />
@@ -47,6 +52,7 @@ const Carousel = ({ post }: { post: Post }) => {
       {at < all.length - 1 && <button onClick={() => slide(1)} aria-label="Next photo" className={`${arrow} right-2`}><ChevronRight size={18} /></button>}
       <div className="absolute inset-x-0 bottom-3 flex justify-center gap-1">
         {all.map((src, i) => <span key={src} className={`size-1.5 rounded-full ${i === at ? 'bg-white' : 'bg-white/40'}`} />)}
+      </div>
       </div>
     </div>
   );
