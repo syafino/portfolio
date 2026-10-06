@@ -75,9 +75,9 @@ const Chat = ({ state, setState }: { state: ChatState; setState: (s: ChatState) 
             </div>
           ))}
           {turns.length === 1 && (
-            <div className="mt-3 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-col items-end gap-2">
               {chat.suggestions.map((s) => (
-                <button key={s} onClick={() => send(s)} className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-left hover:bg-hover">{s}</button>
+                <button key={s} onClick={() => send(s)} className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-right hover:bg-hover">{s}</button>
               ))}
             </div>
           )}
