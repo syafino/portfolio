@@ -18,7 +18,7 @@ export const profile = {
   name: 'Syafino Yunalfian',
   category: 'AI Engineer',
   bio: [
-    'Co-founder @ Sylmu · VP & AI Systems Lead @ Agentic AI UIUC',
+    'Technical PM @ VoiceOS (YC P25) · VP & AI Systems Lead @ Agentic AI UIUC',
     "CS & Statistics @ UIUC '27",
     'I build agents, RAG pipelines and automation that runs in production, not just in demos',
     '📍 Champaign, IL',
@@ -53,7 +53,7 @@ export const chat = {
   status: 'AI assistant · answers from my portfolio',
   // Background only the chat sees, on top of the posts below.
   about:
-    "Syafino grew up in Jakarta and moved to the U.S. for school, UIUC to study statistics and computer science. His background spans applied AI, software engineering, research, and early-stage startups. He's worked as an AI engineer in healthcare, leads one of UIUC's major AI organizations, has built and won technical projects through hackathons, and is now moving toward entrepreneurship by building an early-stage startup focused on coordination and contract workflows.",
+    "Syafino grew up in Jakarta and moved to the U.S. for school, UIUC to study statistics and computer science. His background spans applied AI, software engineering, research, and early-stage startups. He's worked as an AI engineer in healthcare, leads one of UIUC's major AI organizations, has built and won technical projects through hackathons and is moving toward entrepreneurship.",
   greeting: "Hey! I'm an AI version of Syafino. Ask me about my work, projects or what I'm up to.",
   suggestions: ['What are you working on right now?', 'Tell me about your projects', 'What did you do at Elara Health?'],
   error: "That didn't go through. Try again, or email me at syafino2@illinois.edu.",
@@ -74,15 +74,31 @@ export type Post = {
 // Posts tab: experience, newest first.
 export const posts: Post[] = [
   {
-    slug: 'sylmu',
-    image: '/photos/sylmu.jpg',
-    title: 'Sylmu',
-    subtitle: 'Co-founder',
-    date: 'Now',
+    slug: 'voiceos',
+    title: 'VoiceOS (YC P25)',
+    subtitle: 'United States · Hybrid',
+    date: 'Oct 2026 – Present',
     caption:
-      'New chapter: I\'m co-founding Sylmu. We make sure companies actually deliver on their contracts after they sign them.\n\nHere\'s the problem. Once a deal is signed, the people who negotiated it move on, and the teams who have to deliver often never read the contract. Renewals, SLAs, reporting deadlines and price changes end up in a PDF and in someone\'s memory. World Commerce & Contracting\'s 2026 research puts the cost at around 11% of a contract\'s value.\n\nSylmu reads your contracts, pulls out every commitment and turns each one into a task with an owner and a due date, sent to the team that has to act with the clause attached. You can also ask Mavis, our AI assistant, things like "what do we owe Acme this quarter?" and get an answer in seconds.\n\nThe demo is ready and we\'re looking for a few design partners. If your company signs more contracts than it can keep track of, email me.',
-    tags: ['startup', 'cofounder', 'contracts', 'AI'],
-    links: [{ label: 'Email me', href: socials.email }],
+      "Started a contract as Technical Project Manager at VoiceOS, a YC P25 company. It came through an agreement with Agentic AI @ UIUC, and I'm working on their AI tools and integrations.",
+    tags: ['YC', 'AI tools', 'integrations', 'contract'],
+  },
+  {
+    slug: 'cozad',
+    title: 'Landuyt Center for Entrepreneurship',
+    subtitle: 'Champaign, IL',
+    date: 'Oct 2026 – Present',
+    caption:
+      "Joined the Landuyt Center for Entrepreneurship as part-time staff on the Cozad program, which puts more than $700K in funding behind student startups.",
+    tags: ['entrepreneurship', 'Cozad', 'startups', 'UIUC'],
+  },
+  {
+    slug: 'interpretability',
+    title: 'AI Interpretability @ Illinois',
+    subtitle: 'Champaign, IL',
+    date: 'Sep 2026 – Present',
+    caption:
+      "Doing AI research with AI Interpretability @ Illinois since September 2026. My focus is harmful fine-tuning: how fine-tuning can undo a model's safety training, and what's happening inside the model when it does.",
+    tags: ['AI safety', 'interpretability', 'fine-tuning', 'research'],
   },
   {
     slug: 'elara',
